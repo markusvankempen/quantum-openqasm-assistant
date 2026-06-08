@@ -1,5 +1,15 @@
 # Quantum OpenQASM Assistant
 
+<!--
+SEO: Quantum OpenQASM Assistant | VS Code Extension | MCP Server | IBM Quantum | OpenQASM 2.0 | QASM | Qiskit
+quantum computing, quantum computer, qubit, qubits, quantum circuit, quantum circuits, quantum hardware,
+quantum lab, quantum programming, quantum physics, quantum experiment, quantum job, quantum backend,
+ibm quantum, ibm cloud, ibm fez, ibm marrakesh, sampler v2, bell state, ghz state, cloud quantum,
+openqasm, openqasm 2.0, qasm, .qasm, model context protocol, mcp, mcp server, cursor, vscode,
+visual studio code, ibm bob, antigravity, copilot, ai assistant, ai agent, llm tools,
+typescript, nodejs, histogram, job polling, code engine, sse, stdio, quantum simulator
+-->
+
 [![VS Code Extension](https://img.shields.io/badge/VS%20Code-Extension-007ACC?logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant)
 [![OpenQASM](https://img.shields.io/badge/OpenQASM-2.0-512BD4)](https://openqasm.com/)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-00A67E)](https://modelcontextprotocol.io/)
@@ -10,7 +20,9 @@
   <img src="extension/media/icon.png" alt="Quantum OpenQASM Assistant — atomic icon with cyan nucleus and purple orbits" width="128" />
 </p>
 
-> **Model Context Protocol (MCP) server and VS Code extension for IBM Quantum** — run OpenQASM 2.0 circuits on real hardware from **Cursor**, **VS Code**, **IBM Bob**, and **Google Antigravity**. Quantum Lab panel, job polling, histograms, and one-click MCP setup.
+> **Quantum OpenQASM Assistant** is a **VS Code extension** and **Model Context Protocol (MCP) server** for **IBM Quantum** — submit **OpenQASM 2.0** circuits to real **quantum hardware** and simulators from **Cursor**, **VS Code**, **IBM Bob**, and **Google Antigravity**. Includes **Quantum Lab** (interactive circuit editor), live **job polling**, measurement **histograms**, **Bell state** / **GHZ** examples, **SamplerV2** REST integration, and one-click **MCP setup** for AI coding assistants.
+
+**Search terms:** `quantum computing` · `openqasm` · `qasm` · `ibm quantum` · `qiskit` · `quantum circuit` · `quantum hardware` · `mcp server` · `model context protocol` · `cursor mcp` · `vscode quantum` · `ai quantum assistant` · `quantum programming` · `qubit` · `bell state`
 
 **Author:** Markus van Kempen  
 **Email:** [markus.van.kempen@gmail.com](mailto:markus.van.kempen@gmail.com) · [mvk@ca.ibm.com](mailto:mvk@ca.ibm.com)  
@@ -187,6 +199,12 @@ Please read our **[CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)**.
 ## License
 
 [MIT License](./LICENSE) — Copyright (c) 2026 Markus van Kempen
+
+---
+
+## Topics & keywords
+
+`quantum-computing` · `quantum-computer` · `openqasm` · `openqasm-2` · `qasm` · `ibm-quantum` · `ibm-cloud` · `qiskit` · `quantum-circuit` · `quantum-hardware` · `quantum-lab` · `quantum-programming` · `quantum-physics` · `qubit` · `bell-state` · `quantum-job` · `quantum-backend` · `mcp` · `model-context-protocol` · `mcp-server` · `vscode-extension` · `cursor` · `ibm-bob` · `antigravity` · `copilot` · `ai-assistant` · `typescript` · `nodejs` · `histogram` · `sampler-v2` · `code-engine` · `cloud-quantum`
 
 ---
 
