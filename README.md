@@ -88,9 +88,9 @@ sequenceDiagram
     IBM-->>Ext: measurement histogram
 ```
 
-📖 **[Project structure → docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** · **[Contributing → CONTRIBUTING.md](./CONTRIBUTING.md)** · **[Code of Conduct → CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)** · **[License → LICENSE](./LICENSE)**
+📖 **[Project structure → docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** · **[Local MCP setup → docs/ide/LOCAL-MCP-SETUP.md](./docs/ide/LOCAL-MCP-SETUP.md)** · **[Deployment → docs/deployments/DEPLOYMENT-SCENARIOS.md](./docs/deployments/DEPLOYMENT-SCENARIOS.md)** · **[Extension → extension/README.md](./extension/README.md)** · **[Contributing → CONTRIBUTING.md](./CONTRIBUTING.md)** · **[License → LICENSE](./LICENSE)**
 
-> **Repository policy:** This public GitHub repo publishes overview docs and project metadata only. Extension source, full `docs/`, scripts, and examples live in the **private dev repo** (use `.gitignore.private` when setting it up).
+> **Repository policy:** This public GitHub repo publishes overview and setup documentation. Extension **source code**, scripts, and examples live in the **private dev repo** (use `.gitignore.private` when setting it up).
 
 ---
 
@@ -177,6 +177,17 @@ quantum-openqasm-assistant/
 ```
 
 See **[docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** for the complete file map.
+
+---
+
+## Documentation
+
+| Guide | Description |
+|-------|-------------|
+| [Extension README](./extension/README.md) | VS Code extension features, commands, settings |
+| [Local MCP setup](./docs/ide/LOCAL-MCP-SETUP.md) | Configure MCP in Cursor, VS Code, Bob, Antigravity |
+| [Deployment scenarios](./docs/deployments/DEPLOYMENT-SCENARIOS.md) | Local stdio, Code Engine SSE, Docker, hybrid |
+| [Project structure](./docs/PROJECT-STRUCTURE.md) | Complete repo layout |
 
 ---
 

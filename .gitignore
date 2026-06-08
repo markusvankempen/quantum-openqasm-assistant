@@ -1,8 +1,8 @@
 # ============================================
-# PUBLIC REPO: overview docs + project metadata
+# PUBLIC REPO: docs + metadata (no source)
 # ============================================
-# Published to GitHub: README, structure, LICENSE, CONTRIBUTING,
-# CODE_OF_CONDUCT, mise.toml, and icon. Source → private repo.
+# Published: README, extension/README, LOCAL-MCP-SETUP, DEPLOYMENT-SCENARIOS,
+# PROJECT-STRUCTURE, LICENSE, CONTRIBUTING, CODE_OF_CONDUCT, mise.toml, icons.
 
 # Ignore everything by default
 *
@@ -15,14 +15,21 @@
 !/mise.toml
 !/README.md
 
-# Project structure doc
+# Published docs
 !/docs/
 /docs/*
 !/docs/PROJECT-STRUCTURE.md
+!/docs/ide/
+/docs/ide/*
+!/docs/ide/LOCAL-MCP-SETUP.md
+!/docs/deployments/
+/docs/deployments/*
+!/docs/deployments/DEPLOYMENT-SCENARIOS.md
 
-# Extension icon for README & Marketplace (no source)
+# Extension README + icons (no source)
 !/extension/
 /extension/**
+!/extension/README.md
 !/extension/media/
 /extension/media/*
 !/extension/media/icon.png
