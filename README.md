@@ -88,7 +88,7 @@ sequenceDiagram
     IBM-->>Ext: measurement histogram
 ```
 
-📖 **[Project structure → docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** · **[Local MCP setup → docs/ide/LOCAL-MCP-SETUP.md](./docs/ide/LOCAL-MCP-SETUP.md)** · **[Deployment → docs/deployments/DEPLOYMENT-SCENARIOS.md](./docs/deployments/DEPLOYMENT-SCENARIOS.md)** · **[Extension → extension/README.md](./extension/README.md)** · **[Contributing → CONTRIBUTING.md](./CONTRIBUTING.md)** · **[License → LICENSE](./LICENSE)**
+📖 **[Documentation hub → docs/README.md](./docs/README.md)** · **[Project structure → docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** · **[OpenQASM Primer → docs/OPENQASM-PRIMER.md](./docs/OPENQASM-PRIMER.md)** · **[Tips & Tricks → docs/TIPS-AND-TRICKS.md](./docs/TIPS-AND-TRICKS.md)** · **[Architecture → docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)** · **[Local MCP setup → docs/ide/LOCAL-MCP-SETUP.md](./docs/ide/LOCAL-MCP-SETUP.md)** · **[Deployment → docs/deployments/DEPLOYMENT-SCENARIOS.md](./docs/deployments/DEPLOYMENT-SCENARIOS.md)** · **[Extension → extension/README.md](./extension/README.md)** · **[Contributing → CONTRIBUTING.md](./CONTRIBUTING.md)**
 
 > **Repository policy:** This public GitHub repo publishes overview and setup documentation. Extension **source code**, scripts, and examples live in the **private dev repo** (use `.gitignore.private` when setting it up).
 
@@ -184,10 +184,14 @@ See **[docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** for the complet
 
 | Guide | Description |
 |-------|-------------|
-| [Extension README](./extension/README.md) | VS Code extension features, commands, settings |
-| [Local MCP setup](./docs/ide/LOCAL-MCP-SETUP.md) | Configure MCP in Cursor, VS Code, Bob, Antigravity |
-| [Deployment scenarios](./docs/deployments/DEPLOYMENT-SCENARIOS.md) | Local stdio, Code Engine SSE, Docker, hybrid |
+| [Documentation hub](./docs/README.md) | Index of all published guides |
+| [Architecture](./docs/ARCHITECTURE.md) | System design, MCP, IBM API flow |
+| [OpenQASM Primer](./docs/OPENQASM-PRIMER.md) | Learn OpenQASM 2.0 in plain English |
+| [Tips & Tricks](./docs/TIPS-AND-TRICKS.md) | Backend selection, MCP workflows |
 | [Project structure](./docs/PROJECT-STRUCTURE.md) | Complete repo layout |
+| [Extension README](./extension/README.md) | VS Code extension features, commands |
+| [Local MCP setup](./docs/ide/LOCAL-MCP-SETUP.md) | Cursor, VS Code, Bob, Antigravity |
+| [Deployment scenarios](./docs/deployments/DEPLOYMENT-SCENARIOS.md) | Local, Code Engine, Docker, hybrid |
 
 ---
 

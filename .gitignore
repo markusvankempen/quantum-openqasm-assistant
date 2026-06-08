@@ -1,8 +1,9 @@
 # ============================================
 # PUBLIC REPO: docs + metadata (no source)
 # ============================================
-# Published: README, extension/README, LOCAL-MCP-SETUP, DEPLOYMENT-SCENARIOS,
-# PROJECT-STRUCTURE, LICENSE, CONTRIBUTING, CODE_OF_CONDUCT, mise.toml, icons.
+# Published: README, extension/README, docs hub, ARCHITECTURE, OPENQASM-PRIMER,
+# PROJECT-STRUCTURE, TIPS-AND-TRICKS, LOCAL-MCP-SETUP, DEPLOYMENT-SCENARIOS,
+# LICENSE, CONTRIBUTING, CODE_OF_CONDUCT, mise.toml, icons.
 
 # Ignore everything by default
 *
@@ -18,7 +19,11 @@
 # Published docs
 !/docs/
 /docs/*
+!/docs/README.md
+!/docs/ARCHITECTURE.md
+!/docs/OPENQASM-PRIMER.md
 !/docs/PROJECT-STRUCTURE.md
+!/docs/TIPS-AND-TRICKS.md
 !/docs/ide/
 /docs/ide/*
 !/docs/ide/LOCAL-MCP-SETUP.md

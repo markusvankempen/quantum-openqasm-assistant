@@ -2,7 +2,7 @@
 
 Complete overview of the Quantum OpenQASM Assistant project organization.
 
-> **Public GitHub repo** publishes this file plus [README.md](../README.md), [LICENSE](../LICENSE), [CONTRIBUTING.md](../CONTRIBUTING.md), [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md), and [mise.toml](../mise.toml). All other paths below live in the private dev repo.
+> **Public GitHub repo** publishes [README.md](../README.md), [docs/README.md](./README.md), [ARCHITECTURE.md](./ARCHITECTURE.md), [OPENQASM-PRIMER.md](./OPENQASM-PRIMER.md), [TIPS-AND-TRICKS.md](./TIPS-AND-TRICKS.md), [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md), [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md), [extension/README.md](../extension/README.md), plus LICENSE, CONTRIBUTING, and CODE_OF_CONDUCT. Source code and examples live in the **private dev repo**.
 
 ## 📁 Directory Layout
 
