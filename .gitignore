@@ -27,6 +27,7 @@
 !/docs/ide/
 /docs/ide/*
 !/docs/ide/LOCAL-MCP-SETUP.md
+!/docs/ide/REMOTE-MCP-SETUP.md
 !/docs/deployments/
 /docs/deployments/*
 !/docs/deployments/DEPLOYMENT-SCENARIOS.md
@@ -40,6 +41,36 @@
 !/extension/media/icon.png
 !/extension/media/icon.svg
 
+# Code Engine deploy (public) — bridge.mjs stays private (see deployments/code-engine/README.md)
+!/deployments/
+/deployments/*
+!/deployments/code-engine/
+/deployments/code-engine/*
+!/deployments/code-engine/README.md
+!/deployments/code-engine/DEPLOYMENT-GUIDE.md
+!/deployments/code-engine/deploy.sh
+!/deployments/code-engine/deploy-ibmcloud.sh
+!/deployments/code-engine/generate-mcp-configs.sh
+!/deployments/code-engine/check-remote-health.sh
+!/deployments/code-engine/Dockerfile
+!/deployments/code-engine/.dockerignore
+!/deployments/code-engine/code-engine.yaml
+!/deployments/code-engine/mcp-client.json
+!/deployments/code-engine/mcp-client-vscode-remote.json
+!/deployments/code-engine/mcp-client-cursor-remote.json
+!/deployments/code-engine/mcp-configs/
+/deployments/code-engine/mcp-configs/*
+!/deployments/code-engine/mcp-configs/README.md
+!/deployments/code-engine/mcp-configs/*.json
+!/deployments/code-engine/mcp-configs/deployed/
+/deployments/code-engine/mcp-configs/deployed/*
+!/deployments/code-engine/mcp-configs/deployed/README.md
+
+# Workspace MCP template (not live mcp.json)
+!.vscode/
+.vscode/*
+!.vscode/mcp.json.example
+
 # ============================================
 # Never publish
 # ============================================
@@ -49,3 +80,7 @@ internal/
 .env.*
 **/.env
 **/.env.*
+deployments/code-engine/bridge.mjs
+
+# Local MCP configs with resolved CE_ENDPOINT (use mcp.json.example + generate-mcp-configs.sh)
+.vscode/mcp.json

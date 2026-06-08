@@ -123,6 +123,8 @@ The extension spawns `extension/out/server.js` directly with env vars.
 
 ### Architecture
 
+Production deploy uses **`bridge.mjs`** (Zendesk MCP pattern): a dashboard + SSE gateway that spawns the published npm package `@markusvankempen/quantum-openqasm-mcp` (stdio) per client session — **all 10 tools**, server-side credentials.
+
 ```mermaid
 graph TB
     subgraph clients [MCP Clients]
@@ -131,20 +133,33 @@ graph TB
         C3[Antigravity]
     end
 
-    CE[IBM Code Engine<br/>server-sse.js]
+    CE[IBM Code Engine<br/>bridge.mjs + dashboard]
+    MCP[quantum-openqasm-mcp stdio]
     IBM[IBM Quantum API]
 
     C1 -->|HTTPS /sse| CE
     C2 -->|HTTPS /sse| CE
     C3 -->|HTTPS /sse| CE
-    CE --> IBM
+    CE --> MCP --> IBM
 ```
+
+**Operational UI** (after deploy — resolve `CE_ENDPOINT`, do not hardcode URLs):
+
+| Path | Purpose |
+|------|---------|
+| `/` | Dashboard — stats, tools, connect snippets |
+| `/test` | Connection test (IAM, MCP probe, `list_backends`) |
+| `/admin` | Update IBM credentials at runtime |
+| `/sse` | MCP SSE endpoint |
+| `/health` | Liveness probe |
+
+Full guide (private dev repo): `deployments/code-engine/DEPLOYMENT-GUIDE.md`
 
 ### Prerequisites
 
 1. **IBM Cloud account** — [cloud.ibm.com](https://cloud.ibm.com)
-2. **API keys** — IBM Cloud IAM + IBM Quantum credentials
-3. **IBM Cloud CLI** + Code Engine plugin:
+2. **Credentials** — `IBMCLOUD_API_KEY` (deploy), `IBM_API_KEY` + `IBM_SERVICE_CRN` (Quantum)
+3. **IBM Cloud CLI** + Code Engine plugin + Docker/Podman:
 
 ```bash
 ibmcloud plugin install code-engine
@@ -156,29 +171,51 @@ ibmcloud plugin install code-engine
 
 ```bash
 cd deployments/code-engine
-IBM_CLOUD_API_KEY=... IBM_API_KEY=... IBM_SERVICE_CRN=... ./deploy.sh
+
+IBMCLOUD_API_KEY=your_ibm_cloud_api_key \
+IBM_API_KEY=your_quantum_api_key \
+IBM_SERVICE_CRN=crn:v1:bluemix:public:quantum-computing:... \
+./deploy.sh
 ```
+
+Optional: `IBM_QUANTUM_ENDPOINT`, `IBM_QUANTUM_BACKEND`, `QUANTUM_MCP_NPM_VERSION=1.7.2`
 
 The script outputs:
 
-- Application URL
-- SSE endpoint: `<app-url>/sse`
-- Health endpoint: `<app-url>/health`
+- **Dashboard:** `<CE_ENDPOINT>/`
+- **SSE:** `<CE_ENDPOINT>/sse`
+- **Test UI:** `<CE_ENDPOINT>/test`
+- **Admin:** `<CE_ENDPOINT>/admin` (save `BRIDGE_ADMIN_SECRET` from deploy output)
 
-**Build MCP server first:**
+No local extension build required — the Docker image installs the published npm MCP package.
 
 ```bash
-cd extension && npm install && node esbuild.js
+# Resolve URL after deploy
+export CE_ENDPOINT=$(ibmcloud ce app get --name quantum-mcp-remote --output json \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['status']['url'])")
+curl -sS "${CE_ENDPOINT}/health"
 ```
 
 ### Configure clients for remote SSE
 
-**Extension remote mode:**
+📖 **[Remote MCP setup (full guide)](../ide/REMOTE-MCP-SETUP.md)** — `mcp.json` for VS Code, Cursor, Bob, Antigravity, Claude Desktop, extension remote mode, and end-to-end test checklist.
 
-| Setting | Value |
-|---------|-------|
-| `quantumAssistant.mcpMode` | `remote` |
-| `quantumAssistant.remoteMcpUrl` | `https://your-app.region.codeengine.appdomain.cloud/sse` |
+**Templates:** `deployments/code-engine/mcp-configs/` (`<CE_ENDPOINT>` placeholder)  
+**Local generated configs:** run `deployments/code-engine/generate-mcp-configs.sh` (gitignored output)  
+**Workspace:** `.vscode/mcp.json.example` → `.vscode/mcp.json`
+
+**VS Code** (`"servers"` + native SSE):
+
+```json
+{
+  "servers": {
+    "quantum-openqasm-mcp-remote": {
+      "type": "sse",
+      "url": "https://<CE_ENDPOINT>/sse"
+    }
+  }
+}
+```
 
 **Cursor** (`~/.cursor/mcp.json`):
 
@@ -187,20 +224,23 @@ cd extension && npm install && node esbuild.js
   "mcpServers": {
     "quantum-openqasm-mcp-remote": {
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://your-app.region.codeengine.appdomain.cloud/sse"]
+      "args": ["-y", "mcp-remote", "https://<CE_ENDPOINT>/sse"]
     }
   }
 }
 ```
 
-Or use an SSE-capable MCP proxy compatible with your IDE.
+**Extension remote mode:** `quantumAssistant.mcpMode` = `remote`, `remoteMcpUrl` = `https://<CE_ENDPOINT>/sse`.
 
 ### Monitoring
 
 ```bash
-ibmcloud ce application logs --name quantum-mcp-server --follow
-ibmcloud ce application get --name quantum-mcp-server
+ibmcloud ce app logs --name quantum-mcp-remote --follow
+ibmcloud ce app get --name quantum-mcp-remote
+curl -sS "${CE_ENDPOINT}/stats" | jq .
 ```
+
+Open the **dashboard** at `${CE_ENDPOINT}/` for live session count, tool usage, and copy-paste MCP config snippets.
 
 ### Pros & cons
 

@@ -22,8 +22,8 @@ quantum computing docs, architecture, tips and tricks, openqasm guide, deploymen
 | **Architecture** | [ARCHITECTURE.md](./ARCHITECTURE.md) — system design, MCP, IBM API flow |
 | **Project layout** | [PROJECT-STRUCTURE.md](./PROJECT-STRUCTURE.md) — repo directory map |
 | **Learn OpenQASM** | [OPENQASM-PRIMER.md](./OPENQASM-PRIMER.md) · [TIPS-AND-TRICKS.md](./TIPS-AND-TRICKS.md) |
-| **IDE & MCP** | [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md) — Cursor, VS Code, Bob, Antigravity |
-| **Cloud deployment** | [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md) — stdio, SSE, Docker, hybrid |
+| **IDE & MCP** | [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md) — local stdio · [ide/REMOTE-MCP-SETUP.md](./ide/REMOTE-MCP-SETUP.md) — Code Engine SSE |
+| **Cloud deployment** | [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md) · [Code Engine deploy](../../deployments/code-engine/README.md) (public) |
 | **Contributing** | [../CONTRIBUTING.md](../CONTRIBUTING.md) · [../CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) |
 
 ## Quick navigation by topic
@@ -31,7 +31,8 @@ quantum computing docs, architecture, tips and tricks, openqasm guide, deploymen
 | Topic | Start here |
 |-------|------------|
 | **New to OpenQASM** | [OPENQASM-PRIMER.md](./OPENQASM-PRIMER.md) |
-| **MCP in your AI IDE** | [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md) |
+| **MCP in your AI IDE (local)** | [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md) |
+| **MCP remote (Code Engine)** | [ide/REMOTE-MCP-SETUP.md](./ide/REMOTE-MCP-SETUP.md) |
 | **System design** | [ARCHITECTURE.md](./ARCHITECTURE.md) |
 | **Backend & workflow tips** | [TIPS-AND-TRICKS.md](./TIPS-AND-TRICKS.md) |
 | **Deploy remote MCP** | [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md) |

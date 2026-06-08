@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "quantum-openqasm-mcp-remote": {
+      "url": "https://<CE_ENDPOINT>/sse"
+    }
+  }
+}

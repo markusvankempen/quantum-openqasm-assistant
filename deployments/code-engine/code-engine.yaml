@@ -1,0 +1,70 @@
+# IBM Code Engine Application Configuration
+# Deploy Quantum MCP Server as a serverless application
+
+apiVersion: codeengine.cloud.ibm.com/v1beta1
+kind: Application
+metadata:
+  name: quantum-mcp-server
+  labels:
+    app: quantum-mcp
+    version: "1.0.0"
+spec:
+  # Container image
+  imageReference: us.icr.io/quantum-mcp/server:latest
+  
+  # Resource allocation
+  resources:
+    requests:
+      cpu: "0.25"
+      memory: "512Mi"
+    limits:
+      cpu: "1"
+      memory: "1Gi"
+  
+  # Scaling configuration
+  scale:
+    minScale: 0  # Scale to zero when idle
+    maxScale: 10
+    concurrency: 100
+    concurrencyTarget: 80
+  
+  # Port configuration
+  port: 3000
+  
+  # Environment variables
+  env:
+    - name: NODE_ENV
+      value: "production"
+    - name: PORT
+      value: "3000"
+    - name: IBM_API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: quantum-mcp-secrets
+          key: ibm-api-key
+  
+  # Health checks
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 3000
+    initialDelaySeconds: 10
+    periodSeconds: 30
+    timeoutSeconds: 3
+    failureThreshold: 3
+  
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: 3000
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 3
+    failureThreshold: 3
+  
+  # Service binding
+  service:
+    type: public
+    visibility: public
+
+# Marde by MVK

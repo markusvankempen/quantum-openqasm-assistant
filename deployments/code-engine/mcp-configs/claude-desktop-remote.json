@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "quantum-openqasm-mcp-remote": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://<CE_ENDPOINT>/sse"]
+    }
+  }
+}

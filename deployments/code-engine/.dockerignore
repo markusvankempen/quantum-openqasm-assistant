@@ -1,0 +1,7 @@
+# Build context: deployments/code-engine only
+node_modules
+.git
+.env
+.env.*
+*.md
+!README.md

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "quantum-openqasm-mcp-remote": {
+      "command": "uvx",
+      "args": ["mcp-proxy", "https://<CE_ENDPOINT>/sse"]
+    }
+  }
+}

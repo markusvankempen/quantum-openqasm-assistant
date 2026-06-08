@@ -9,7 +9,7 @@ local mcp server, quantum-openqasm-mcp, stdio mcp, ibm quantum credentials, mcp.
 
 **Supported IDEs:** Cursor · VS Code · IBM Bob · Google Antigravity
 
-📖 **[Main README](../../README.md)** · **[Extension README](../../extension/README.md)** · **[Deployment scenarios](../deployments/DEPLOYMENT-SCENARIOS.md)** · **[Project structure](../PROJECT-STRUCTURE.md)**
+📖 **[Main README](../../README.md)** · **[Remote MCP (Code Engine)](./REMOTE-MCP-SETUP.md)** · **[Extension README](../../extension/README.md)** · **[Deployment scenarios](../deployments/DEPLOYMENT-SCENARIOS.md)** · **[Project structure](../PROJECT-STRUCTURE.md)**
 
 ---
 
@@ -102,18 +102,44 @@ graph LR
 
 After installing `@markusvankempen/quantum-openqasm-mcp` from npm:
 
+```bash
+npx @markusvankempen/quantum-openqasm-mcp --setup
+```
+
+Or set `IBM_API_KEY`, `IBM_SERVICE_CRN`, and related vars in `~/.quantum-openqasm-mcp/.env`.
+
+**VS Code (native MCP)** — use `inputs` so VS Code prompts securely on first use:
+
 ```json
 {
-  "mcpServers": {
+  "servers": {
     "quantum-openqasm-mcp": {
+      "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"]
+      "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"],
+      "env": {
+        "IBM_API_KEY": "${input:ibmApiKey}",
+        "IBM_SERVICE_CRN": "${input:ibmServiceCrn}"
+      }
     }
-  }
+  },
+  "inputs": [
+    {
+      "id": "ibmApiKey",
+      "type": "promptString",
+      "description": "IBM Cloud API Key",
+      "password": true
+    },
+    {
+      "id": "ibmServiceCrn",
+      "type": "promptString",
+      "description": "IBM Quantum Service CRN"
+    }
+  ]
 }
 ```
 
-Set `IBM_API_KEY`, `IBM_SERVICE_CRN`, and related vars in `~/.quantum-openqasm-mcp/.env`.
+The server fails fast at startup if required credentials are missing (stderr shows setup guidance).
 
 ---
 
