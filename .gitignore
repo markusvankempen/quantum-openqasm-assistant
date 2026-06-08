@@ -20,10 +20,13 @@
 /docs/*
 !/docs/PROJECT-STRUCTURE.md
 
-# README icon
-!/resources/
-/resources/*
-!/resources/icon.svg
+# Extension icon for README & Marketplace (no source)
+!/extension/
+/extension/**
+!/extension/media/
+/extension/media/*
+!/extension/media/icon.png
+!/extension/media/icon.svg
 
 # ============================================
 # Never publish

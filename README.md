@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 <p align="center">
-  <img src="resources/icon.svg" alt="Quantum OpenQASM Assistant" width="128" />
+  <img src="extension/media/icon.png" alt="Quantum OpenQASM Assistant — atomic icon with cyan nucleus and purple orbits" width="128" />
 </p>
 
 > **Model Context Protocol (MCP) server and VS Code extension for IBM Quantum** — run OpenQASM 2.0 circuits on real hardware from **Cursor**, **VS Code**, **IBM Bob**, and **Google Antigravity**. Quantum Lab panel, job polling, histograms, and one-click MCP setup.
