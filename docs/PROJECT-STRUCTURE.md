@@ -2,6 +2,8 @@
 
 Complete overview of the Quantum OpenQASM Assistant project organization.
 
+> **Public GitHub repo** publishes this file plus [README.md](../README.md), [LICENSE](../LICENSE), [CONTRIBUTING.md](../CONTRIBUTING.md), [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md), and [mise.toml](../mise.toml). All other paths below live in the private dev repo.
+
 ## 📁 Directory Layout
 
 ```

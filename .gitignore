@@ -1,25 +1,32 @@
 # ============================================
-# PUBLIC REPO: README + PROJECT-STRUCTURE only
+# PUBLIC REPO: overview docs + project metadata
 # ============================================
-# Publishes only README.md and docs/PROJECT-STRUCTURE.md.
-# All other source and docs → private repo later (use .gitignore.private).
+# Published to GitHub: README, structure, LICENSE, CONTRIBUTING,
+# CODE_OF_CONDUCT, mise.toml, and icon. Source → private repo.
 
 # Ignore everything by default
 *
 
-# Keep this file
+# Project metadata & policy files
 !.gitignore
-
-# Allow root README only
+!/LICENSE
+!/CONTRIBUTING.md
+!/CODE_OF_CONDUCT.md
+!/mise.toml
 !/README.md
 
-# Allow docs/PROJECT-STRUCTURE.md only
+# Project structure doc
 !/docs/
 /docs/*
 !/docs/PROJECT-STRUCTURE.md
 
+# README icon
+!/resources/
+/resources/*
+!/resources/icon.svg
+
 # ============================================
-# Never publish (belt-and-suspenders)
+# Never publish
 # ============================================
 Internal/
 internal/

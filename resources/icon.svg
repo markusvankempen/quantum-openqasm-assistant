@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!--
+    Bloch Sphere — universal quantum computing symbol.
+    Uses currentColor so VS Code themes it correctly in the activity bar.
+
+    Layout (24×24 viewBox):
+      • Sphere outline
+      • Equatorial ellipse (dashed, showing 3-D depth)
+      • Z-axis (|0⟩ top, |1⟩ bottom)
+      • State vector arrow pointing to a superposition state (upper-right)
+  -->
+
+  <!-- Sphere outline -->
+  <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.5"/>
+
+  <!-- Equatorial ellipse — dashed to show the hidden back half -->
+  <ellipse cx="12" cy="12" rx="9.5" ry="3.2"
+           stroke="currentColor" stroke-width="1"
+           stroke-dasharray="2.8 1.8"/>
+
+  <!-- Z-axis line (thin, subtle) -->
+  <line x1="12" y1="2" x2="12" y2="22"
+        stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+
+  <!-- |0⟩ north-pole marker -->
+  <circle cx="12" cy="2.5" r="1.7" fill="currentColor"/>
+
+  <!-- |1⟩ south-pole marker (smaller) -->
+  <circle cx="12" cy="21.5" r="1.1" fill="currentColor"/>
+
+  <!-- State vector — from origin to superposition (upper-right, on the surface) -->
+  <line x1="12" y1="12" x2="18.2" y2="6.3"
+        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Arrowhead / state dot at the tip -->
+  <circle cx="18.2" cy="6.3" r="1.6" fill="currentColor"/>
+</svg>
