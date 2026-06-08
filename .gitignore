@@ -1,0 +1,29 @@
+# ============================================
+# PUBLIC REPO: README + PROJECT-STRUCTURE only
+# ============================================
+# Publishes only README.md and docs/PROJECT-STRUCTURE.md.
+# All other source and docs → private repo later (use .gitignore.private).
+
+# Ignore everything by default
+*
+
+# Keep this file
+!.gitignore
+
+# Allow root README only
+!/README.md
+
+# Allow docs/PROJECT-STRUCTURE.md only
+!/docs/
+/docs/*
+!/docs/PROJECT-STRUCTURE.md
+
+# ============================================
+# Never publish (belt-and-suspenders)
+# ============================================
+Internal/
+internal/
+.env
+.env.*
+**/.env
+**/.env.*
