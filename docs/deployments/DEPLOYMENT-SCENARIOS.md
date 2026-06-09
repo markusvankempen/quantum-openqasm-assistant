@@ -7,7 +7,32 @@ quantum server deployment, remote mcp, local mcp, code engine quantum, openqasm 
 
 > Complete guide for deploying the **Quantum OpenQASM MCP server** — from **zero-deploy npx** through **IBM Code Engine**, **local Docker/Podman**, **secured SSE**, **watsonx Orchestrate agents**, and **CI smoke tests**. Use with the **VS Code extension** or MCP clients in **Cursor**, **VS Code**, **Bob**, and **Antigravity**.
 
-📖 **[Main README](../../README.md)** · **[Local MCP setup](../ide/LOCAL-MCP-SETUP.md)** · **[Remote MCP setup](../ide/REMOTE-MCP-SETUP.md)** · **[Extension remote mode](../ide/EXTENSION-REMOTE-MCP.md)** · **[Code Engine deploy](../../deployments/code-engine/README.md)** · **[Extension README](../../extension/README.md)**
+📖 **[Main README](../../README.md)** · **[Client modes (extension vs MCP)](../../deployments/README.md)** · **[Local MCP setup](../ide/LOCAL-MCP-SETUP.md)** · **[Remote MCP setup](../ide/REMOTE-MCP-SETUP.md)** · **[Extension remote mode](../ide/EXTENSION-REMOTE-MCP.md)** · **[Code Engine deploy](../../deployments/code-engine/README.md)** · **[Extension README](../../extension/README.md)**
+
+---
+
+## Client modes (what you install)
+
+Infrastructure scenarios below assume you have chosen **how the client connects**. See **[deployments/README.md](../../deployments/README.md)**:
+
+| Mode | Doc |
+|------|-----|
+| Extension only (Quantum Lab, no MCP) | [extension-only](../../deployments/extension-only/README.md) |
+| Extension + local MCP (stdio) | [extension-mcp-local](../../deployments/extension-mcp-local/README.md) |
+| MCP via npm only (no extension) | [mcp-npm](../../deployments/mcp-npm/README.md) |
+| Extension + remote MCP (Code Engine SSE) | [extension-remote-mcp](../../deployments/extension-remote-mcp/README.md) |
+| MCP remote SSE only (no extension) | [mcp-remote-sse](../../deployments/mcp-remote-sse/README.md) |
+
+### Infrastructure quick links
+
+| Scenario | Doc |
+|----------|-----|
+| IBM Code Engine | [code-engine](../../deployments/code-engine/README.md) |
+| Local Podman/Docker bridge | [local-bridge](../../deployments/local-bridge/README.md) |
+| Docker self-hosted SSE | [docker-sse](../../deployments/docker-sse/README.md) |
+| Secured remote (auth) | [secured-remote](../../deployments/secured-remote/README.md) |
+| watsonx Orchestrate | [wxo-orchestrate](../../deployments/wxo-orchestrate/README.md) |
+| CI/CD smoke tests | [ci-cd](../../deployments/ci-cd/README.md) |
 
 ---
 
@@ -159,6 +184,8 @@ The extension spawns `extension/out/server.js` directly with env vars.
 
 ## Scenario 2: IBM Code Engine (remote SSE)
 
+📖 **[code-engine/README.md](../../deployments/code-engine/README.md)** · **[mcp-remote-sse](../../deployments/mcp-remote-sse/README.md)** (IDE only) · **[extension-remote-mcp](../../deployments/extension-remote-mcp/README.md)** (with Lab)
+
 ### Architecture
 
 Production deploy uses **`bridge.mjs`** (Zendesk MCP pattern): a dashboard + SSE gateway that spawns the published npm package `@markusvankempen/quantum-openqasm-mcp` (stdio) per client session — **all 10 tools**, server-side credentials.
@@ -295,6 +322,8 @@ Open the **dashboard** at `${CE_ENDPOINT}/` for live session count, tool usage, 
 
 ## Scenario 3: Docker (self-hosted SSE)
 
+📖 **[docker-sse/README.md](../../deployments/docker-sse/README.md)** — quick start hub
+
 ### Architecture
 
 Run `server-sse.js` in a container on your own infrastructure, exposing port 3000 with `/sse` and `/health` endpoints.
@@ -427,6 +456,8 @@ npx @markusvankempen/quantum-openqasm-mcp --check   # verify credentials
 
 ## Scenario 6: Local Podman/Docker bridge (dev gateway)
 
+📖 **[local-bridge/README.md](../../deployments/local-bridge/README.md)** — quick start hub
+
 Run the **same Code Engine image** on your laptop to exercise remote mode — dashboard, `/test`, `/sse`, extension `mcpMode = remote` — **without** deploying to IBM Cloud.
 
 ### Architecture
@@ -484,6 +515,8 @@ open http://localhost:8080/
 ---
 
 ## Scenario 8: Secured remote (auth in front of SSE)
+
+📖 **[secured-remote/README.md](../../deployments/secured-remote/README.md)** — security tiers hub
 
 Scenario 2 and 3 expose `/sse` over HTTPS with **IBM credentials on the server** — convenient, but some teams need **access control** before traffic reaches the gateway.
 
@@ -653,6 +686,8 @@ flowchart LR
 
 ## Scenario 9: watsonx Orchestrate agent attachment
 
+📖 **[wxo-orchestrate/README.md](../../deployments/wxo-orchestrate/README.md)** — quick start hub
+
 Deploy the MCP gateway **once** (Scenario 2 or 6), then attach the SSE endpoint to a **watsonx Orchestrate** agent as a remote tool source — same pattern as [Zendesk MCP](https://github.com/markusvankempen/zendesk_mcp) on Code Engine.
 
 ### Architecture
@@ -697,6 +732,8 @@ flowchart TB
 ---
 
 ## Scenario 10: CI/CD ephemeral stdio
+
+📖 **[ci-cd/README.md](../../deployments/ci-cd/README.md)** — quick start hub
 
 Run MCP **only for the duration of a pipeline job** — no long-running SSE server. Ideal for release smoke tests and credential regression checks.
 

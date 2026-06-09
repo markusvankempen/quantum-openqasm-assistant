@@ -2,7 +2,8 @@
 # PUBLIC REPO: docs + metadata (no source)
 # ============================================
 # Published: README, extension/README, docs hub, ARCHITECTURE, OPENQASM-PRIMER,
-# PROJECT-STRUCTURE, TIPS-AND-TRICKS, LOCAL-MCP-SETUP, DEPLOYMENT-SCENARIOS,
+# QISKIT-INTEGRATION, PROJECT-STRUCTURE, TIPS-AND-TRICKS, LOCAL-MCP-SETUP,
+# DEPLOYMENT-SCENARIOS, deployments hub + client modes, examples/qiskit-bell-export.py,
 # LICENSE, CONTRIBUTING, CODE_OF_CONDUCT, mise.toml, icons.
 
 # Ignore everything by default
@@ -30,6 +31,7 @@
 !/docs/OPENQASM-PRIMER.md
 !/docs/PROJECT-STRUCTURE.md
 !/docs/TIPS-AND-TRICKS.md
+!/docs/QISKIT-INTEGRATION.md
 !/docs/ide/
 /docs/ide/*
 !/docs/ide/LOCAL-MCP-SETUP.md
@@ -48,9 +50,48 @@
 !/extension/media/icon.png
 !/extension/media/icon.svg
 
-# Code Engine deploy (public) — bridge.mjs stays private (see deployments/code-engine/README.md)
+# Examples (public) — Qiskit export workflow only
+!/examples/
+/examples/*
+!/examples/README.md
+!/examples/qiskit-bell-export.py
+
+# Deployments hub + client modes (public) — bridge.mjs stays private
 !/deployments/
 /deployments/*
+!/deployments/README.md
+!/deployments/extension-only/
+/deployments/extension-only/*
+!/deployments/extension-only/README.md
+!/deployments/extension-mcp-local/
+/deployments/extension-mcp-local/*
+!/deployments/extension-mcp-local/README.md
+!/deployments/mcp-npm/
+/deployments/mcp-npm/*
+!/deployments/mcp-npm/README.md
+!/deployments/extension-remote-mcp/
+/deployments/extension-remote-mcp/*
+!/deployments/extension-remote-mcp/README.md
+!/deployments/mcp-remote-sse/
+/deployments/mcp-remote-sse/*
+!/deployments/mcp-remote-sse/README.md
+!/deployments/local-bridge/
+/deployments/local-bridge/*
+!/deployments/local-bridge/README.md
+!/deployments/docker-sse/
+/deployments/docker-sse/*
+!/deployments/docker-sse/README.md
+!/deployments/secured-remote/
+/deployments/secured-remote/*
+!/deployments/secured-remote/README.md
+!/deployments/wxo-orchestrate/
+/deployments/wxo-orchestrate/*
+!/deployments/wxo-orchestrate/README.md
+!/deployments/ci-cd/
+/deployments/ci-cd/*
+!/deployments/ci-cd/README.md
+
+# Code Engine deploy (public) — bridge.mjs stays private (see deployments/code-engine/README.md)
 !/deployments/code-engine/
 /deployments/code-engine/*
 !/deployments/code-engine/README.md

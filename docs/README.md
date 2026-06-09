@@ -22,14 +22,19 @@ quantum computing docs, architecture, tips and tricks, openqasm guide, deploymen
 | **Architecture** | [ARCHITECTURE.md](./ARCHITECTURE.md) — system design, MCP, IBM API flow |
 | **Project layout** | [PROJECT-STRUCTURE.md](./PROJECT-STRUCTURE.md) — repo directory map |
 | **Learn OpenQASM** | [OPENQASM-PRIMER.md](./OPENQASM-PRIMER.md) · [TIPS-AND-TRICKS.md](./TIPS-AND-TRICKS.md) |
+| **Qiskit workflow** | [QISKIT-INTEGRATION.md](./QISKIT-INTEGRATION.md) — export QASM → submit via MCP / Lab |
 | **IDE & MCP** | [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md) — local stdio · [ide/REMOTE-MCP-SETUP.md](./ide/REMOTE-MCP-SETUP.md) — Code Engine SSE · [ide/EXTENSION-REMOTE-MCP.md](./ide/EXTENSION-REMOTE-MCP.md) — extension remote mode |
-| **Cloud deployment** | [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md) · [Code Engine deploy](../../deployments/code-engine/README.md) (public) |
+| **Client modes** | [../deployments/README.md](../deployments/README.md) — 5 modes: extension · +local MCP · npm · +remote · remote SSE only |
+| **Infrastructure** | [local-bridge](../deployments/local-bridge/README.md) · [docker-sse](../deployments/docker-sse/README.md) · [secured-remote](../deployments/secured-remote/README.md) · [wxo](../deployments/wxo-orchestrate/README.md) · [ci-cd](../deployments/ci-cd/README.md) |
+| **Cloud deployment** | [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md) · [Code Engine deploy](../deployments/code-engine/README.md) |
 | **Contributing** | [../CONTRIBUTING.md](../CONTRIBUTING.md) · [../CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) |
 
 ## Quick navigation by topic
 
 | Topic | Start here |
 |-------|------------|
+| **Which setup do I need?** | [../deployments/README.md](../deployments/README.md) |
+| **Using Qiskit + this tool** | [QISKIT-INTEGRATION.md](./QISKIT-INTEGRATION.md) |
 | **New to OpenQASM** | [OPENQASM-PRIMER.md](./OPENQASM-PRIMER.md) |
 | **MCP in your AI IDE (local)** | [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md) |
 | **MCP remote (Code Engine)** | [ide/REMOTE-MCP-SETUP.md](./ide/REMOTE-MCP-SETUP.md) · run `deployments/code-engine/setup-remote-mcp.sh` |

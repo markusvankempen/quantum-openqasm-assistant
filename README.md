@@ -171,8 +171,22 @@ quantum-openqasm-assistant/
 ├── packages/
 │   └── quantum-openqasm-mcp/   # Standalone npm MCP package
 ├── scripts/                # MCP launcher, e2e tests, examples
-├── docs/                   # Full documentation (private repo)
-├── deployments/            # IBM Code Engine
+├── docs/                   # Published documentation
+│   └── QISKIT-INTEGRATION.md  # Qiskit → OpenQASM → IBM Quantum
+├── examples/               # Qiskit export script (public)
+├── deployments/            # Client modes + infrastructure
+│   ├── README.md           # Hub: 5 client modes + 6 infra scenarios
+│   ├── extension-only/     # Mode 1
+│   ├── extension-mcp-local/# Mode 2
+│   ├── mcp-npm/            # Mode 3
+│   ├── extension-remote-mcp/# Mode 4
+│   ├── mcp-remote-sse/     # Mode 5
+│   ├── code-engine/        # IBM Code Engine
+│   ├── local-bridge/       # Dev gateway
+│   ├── docker-sse/         # Self-hosted
+│   ├── secured-remote/     # Auth tiers
+│   ├── wxo-orchestrate/    # Orchestrate agents
+│   └── ci-cd/              # Pipeline smoke tests
 └── Internal/               # Branding, publishing, status (gitignored)
 ```
 
@@ -187,10 +201,12 @@ See **[docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** for the complet
 | [Documentation hub](./docs/README.md) | Index of all published guides |
 | [Architecture](./docs/ARCHITECTURE.md) | System design, MCP, IBM API flow |
 | [OpenQASM Primer](./docs/OPENQASM-PRIMER.md) | Learn OpenQASM 2.0 in plain English |
+| [Qiskit integration](./docs/QISKIT-INTEGRATION.md) | Qiskit → export QASM → IBM hardware via MCP / Lab |
 | [Tips & Tricks](./docs/TIPS-AND-TRICKS.md) | Backend selection, MCP workflows |
 | [Project structure](./docs/PROJECT-STRUCTURE.md) | Complete repo layout |
 | [Extension README](./extension/README.md) | VS Code extension features, commands |
 | [Local MCP setup](./docs/ide/LOCAL-MCP-SETUP.md) | Cursor, VS Code, Bob, Antigravity |
+| [Deployment hub](./deployments/README.md) | 5 client modes + infra (CE, Docker, WxO, CI) |
 | [Deployment scenarios](./docs/deployments/DEPLOYMENT-SCENARIOS.md) | Local, Code Engine, Docker, hybrid |
 
 ---

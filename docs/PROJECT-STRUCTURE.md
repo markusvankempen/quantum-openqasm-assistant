@@ -2,7 +2,7 @@
 
 Complete overview of the Quantum OpenQASM Assistant project organization.
 
-> **Public GitHub repo** publishes [README.md](../README.md), [docs/README.md](./README.md), [ARCHITECTURE.md](./ARCHITECTURE.md), [OPENQASM-PRIMER.md](./OPENQASM-PRIMER.md), [TIPS-AND-TRICKS.md](./TIPS-AND-TRICKS.md), [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md), [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md), [extension/README.md](../extension/README.md), plus LICENSE, CONTRIBUTING, and CODE_OF_CONDUCT. Source code and examples live in the **private dev repo**.
+> **Public GitHub repo** publishes [README.md](../README.md), [docs/README.md](./README.md), [ARCHITECTURE.md](./ARCHITECTURE.md), [OPENQASM-PRIMER.md](./OPENQASM-PRIMER.md), [QISKIT-INTEGRATION.md](./QISKIT-INTEGRATION.md), [TIPS-AND-TRICKS.md](./TIPS-AND-TRICKS.md), [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md), [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md), [extension/README.md](../extension/README.md), [examples/](../examples/) (Qiskit export script), plus LICENSE, CONTRIBUTING, and CODE_OF_CONDUCT. Extension source and additional `.qasm` circuits live in the **private dev repo**.
 
 ## 📁 Directory Layout
 

@@ -4,7 +4,7 @@ Deploy the Quantum OpenQASM MCP server to [IBM Code Engine](https://www.ibm.com/
 
 **Live deployment:** resolve your URL after deploy — see [Deployment endpoint](./DEPLOYMENT-GUIDE.md#deployment-endpoint-ce_endpoint). **Do not hardcode** the hostname; it is project-specific.
 
-📖 **[Complete deployment guide → DEPLOYMENT-GUIDE.md](./DEPLOYMENT-GUIDE.md)**
+📖 **[Client modes hub](../README.md)** · **[MCP remote SSE (mode 5)](../mcp-remote-sse/README.md)** · **[Extension + remote (mode 4)](../extension-remote-mcp/README.md)** · **[Local bridge](../local-bridge/README.md)** · **[DEPLOYMENT-GUIDE.md](./DEPLOYMENT-GUIDE.md)**
 
 > **`bridge.mjs` is not in the public GitHub repo.** It is required for the Docker image (SSE gateway + dashboard). Keep it in your private dev checkout or obtain it from the author before running `docker build` / `./deploy.sh`.
 
@@ -329,7 +329,7 @@ If you are already in `deployments/code-engine`, use `mcp-configs/deployed/CE_EN
 
 ## Local Docker / Podman test (Scenario 6)
 
-Run the production gateway on your laptop before cloud deploy — see **[Deployment Scenario 6](../../docs/deployments/DEPLOYMENT-SCENARIOS.md#scenario-6-local-podmandocker-bridge-dev-gateway)**.
+Run the production gateway on your laptop before cloud deploy — see **[local-bridge/README.md](../local-bridge/README.md)**.
 
 ```bash
 cd deployments/code-engine
