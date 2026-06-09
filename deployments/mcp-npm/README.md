@@ -127,6 +127,112 @@ The package also loads `.env` from the **current working directory** when the MC
 
 ---
 
+## Setup & configuration workflow (after install)
+
+Once the npm package is installed (or referenced via `npx`), you **register the MCP server in your IDE** and **provide IBM credentials**. The IDE spawns `quantum-openqasm-mcp` as a child process over **stdio** whenever the agent needs tools.
+
+```mermaid
+flowchart TD
+    A[Install / reference npm package] --> B[Choose credential strategy]
+    B --> C[Edit IDE mcp.json]
+    C --> D[Reload IDE / refresh MCP]
+    D --> E[Enable quantum-openqasm-mcp]
+    E --> F[Verify 10 tools + check_credentials]
+    F --> G[Use in chat / agent]
+```
+
+### Post-install checklist
+
+| Step | Action | Done? |
+|------|--------|-------|
+| 1 | Node.js 18+ installed (`node --version`) | ☐ |
+| 2 | IBM API key + service CRN obtained | ☐ |
+| 3 | Credentials set (`.env`, `mcp.json` env, or VS Code `inputs`) | ☐ |
+| 4 | `npx -y @markusvankempen/quantum-openqasm-mcp --check` exits 0 | ☐ |
+| 5 | Server entry added to IDE `mcp.json` (merged, not replaced) | ☐ |
+| 6 | IDE reloaded / MCP servers refreshed | ☐ |
+| 7 | **quantum-openqasm-mcp** enabled — shows **10 tools** | ☐ |
+| 8 | Chat test: `check_credentials` + `list_backends` | ☐ |
+
+---
+
+## Configuration strategies
+
+Pick **one** credential approach — the MCP server reads env vars at process start.
+
+| Strategy | Best for | Where secrets live |
+|----------|----------|-------------------|
+| **`.env` file** | Cursor, Claude, Bob | `~/.quantum-openqasm-mcp/.env` — omit `env` in `mcp.json` |
+| **Inline `env` in `mcp.json`** | Quick local dev | IDE config file (avoid committing) |
+| **VS Code `inputs`** | VS Code only | VS Code secure storage — recommended |
+| **`--setup` wizard** | First-time setup | Wizard writes config + optional `.env` |
+
+**Load order:** environment variables passed by the IDE → `~/.quantum-openqasm-mcp/.env` → `.env` in MCP process working directory.
+
+### Update credentials later
+
+```bash
+# Edit .env
+nano ~/.quantum-openqasm-mcp/.env
+
+# Or re-run wizard
+npx -y @markusvankempen/quantum-openqasm-mcp --setup
+
+# Verify
+npx -y @markusvankempen/quantum-openqasm-mcp --check
+```
+
+Then **reload MCP** in your IDE (see [Activate & reload](#activate--reload-in-your-ide) below).
+
+---
+
+## Add server to your IDE config
+
+### Merge — do not replace
+
+If you already have other MCP servers, **add** `quantum-openqasm-mcp` alongside them:
+
+```json
+{
+  "mcpServers": {
+    "existing-server": { "command": "...", "args": [] },
+    "quantum-openqasm-mcp": {
+      "command": "npx",
+      "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"]
+    }
+  }
+}
+```
+
+Invalid JSON (trailing commas, duplicate keys) prevents **all** MCP servers from loading.
+
+### Global vs project config
+
+| Scope | When to use | Path examples |
+|-------|-------------|---------------|
+| **Global (user)** | All projects, personal machine | `~/.cursor/mcp.json`, VS Code user `mcp.json` |
+| **Project (workspace)** | Team repo, per-project credentials | `.cursor/mcp.json`, `.vscode/mcp.json` |
+
+Commit **project** `mcp.json` only if it uses VS Code `${input:...}` or documents required env vars — **never** commit API keys. Prefer `.env.example` + gitignore for secrets.
+
+**Workspace example** (`.vscode/mcp.json` — VS Code):
+
+```json
+{
+  "servers": {
+    "quantum-openqasm-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"]
+    }
+  }
+}
+```
+
+Credentials from `~/.quantum-openqasm-mcp/.env` apply automatically.
+
+---
+
 ## Configure your MCP client
 
 ### Config file locations
@@ -247,6 +353,56 @@ Alternatively, install the [Quantum OpenQASM Assistant](https://marketplace.visu
 
 ---
 
+## Activate & reload in your IDE
+
+After editing `mcp.json`, the IDE must **start or restart** the MCP child process.
+
+| IDE | Reload / activate | Confirm it works |
+|-----|-------------------|------------------|
+| **Cursor** | **Developer → Reload Window**, or Command Palette → **MCP: List Servers** → restart **quantum-openqasm-mcp** | MCP panel lists **10 tools** |
+| **VS Code** | **Developer → Reload Window**, or **MCP: List Servers** → enable server | First run may prompt for `inputs` if using `${input:...}` |
+| **Claude Desktop** | Quit and reopen Claude Desktop (full restart) | Settings → MCP → server connected |
+| **IBM Bob** | MCP settings → **Refresh all servers**, or reload window | Check `~/.bob/mcp_settings.json` and `.bob/mcp.json` |
+| **Antigravity** | Manage MCP Servers → refresh, or reload window | Try both `~/.gemini/config/mcp_config.json` and `~/.gemini/antigravity/mcp_config.json` |
+
+### Enable the server (first time)
+
+Some IDEs require explicitly **enabling** a newly added server:
+
+1. Open MCP / tools panel in your IDE
+2. Find **quantum-openqasm-mcp** (not `quantum-mcp` or a typo)
+3. Toggle **on** / **enable** if shown as disabled
+4. Expand tools — expect exactly **10** (see [MCP tools](#mcp-tools-10))
+
+### Server name & process
+
+| Setting | Value |
+|---------|-------|
+| **Server name in config** | `quantum-openqasm-mcp` |
+| **npm package** | `@markusvankempen/quantum-openqasm-mcp` |
+| **Transport** | stdio (no TCP port) |
+| **Process** | IDE spawns `npx …` or `quantum-openqasm-mcp` per session |
+
+Bob supports `"disabled": false` explicitly:
+
+```json
+"quantum-openqasm-mcp": {
+  "command": "npx",
+  "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"],
+  "disabled": false
+}
+```
+
+### First chat test
+
+After reload, run this in agent chat:
+
+> Use the **quantum-openqasm-mcp** server: call **check_credentials**, then **list_backends**, and summarize which simulator has the shortest queue.
+
+If the agent cannot see tools, the server failed to start — check IDE MCP logs (stderr often shows missing `IBM_API_KEY`).
+
+---
+
 ## Verify installation
 
 ### 1. Credential check (CLI)
@@ -315,11 +471,25 @@ From Qiskit: see **[Qiskit integration guide](../../docs/QISKIT-INTEGRATION.md)*
 
 | Symptom | Fix |
 |---------|-----|
-| MCP server not listed | Reload IDE; check JSON syntax; merge don't replace other servers |
-| Startup error about credentials | Run `--check`; verify `.env` path or `mcp.json` `env` block |
-| `npx` slow on first run | Normal — npm downloads package once; use global install to cache |
-| Tools timeout on hardware | Check queue with `list_backends`; try a simulator backend |
-| VS Code prompts not appearing | Ensure `inputs` array matches `${input:...}` ids in `env` |
+| MCP server not listed | Reload IDE; validate JSON at [jsonlint.com](https://jsonlint.com); merge don't replace other servers |
+| Server listed but 0 tools | Restart server; run `--check`; read MCP output log in IDE |
+| Startup error about credentials | Run `--check`; verify `.env` at `~/.quantum-openqasm-mcp/.env` or `env` in `mcp.json` |
+| Wrong server name in chat | Ask agent to use **quantum-openqasm-mcp** explicitly |
+| `npx` slow on first run | Normal — npm downloads once; use `npm install -g` to cache |
+| Tools timeout on hardware | `list_backends` for queue; try simulator first |
+| VS Code prompts not appearing | `inputs` ids must match `${input:ibmApiKey}` / `${input:ibmServiceCrn}` exactly |
+| Bob not loading config | Refresh MCP; check both `mcp_settings.json` and `mcp.json` paths |
+| Antigravity not loading | Try alternate path under `~/.gemini/` |
+| Auth errors after key rotation | Update `.env` or re-run `--setup`, then reload MCP |
+
+---
+
+## Security
+
+- Never commit `.env`, API keys, or service CRNs to git
+- Prefer `~/.quantum-openqasm-mcp/.env` (mode `600`) or VS Code `${input:...}` prompts
+- IDE `mcp.json` should contain paths and `npx` args only when using `.env` for secrets
+- Rotate IBM Cloud API keys periodically at [IBM Cloud IAM](https://cloud.ibm.com/iam/apikeys)
 
 ---
 
