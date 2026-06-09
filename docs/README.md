@@ -22,7 +22,7 @@ quantum computing docs, architecture, tips and tricks, openqasm guide, deploymen
 | **Architecture** | [ARCHITECTURE.md](./ARCHITECTURE.md) — system design, MCP, IBM API flow |
 | **Project layout** | [PROJECT-STRUCTURE.md](./PROJECT-STRUCTURE.md) — repo directory map |
 | **Learn OpenQASM** | [OPENQASM-PRIMER.md](./OPENQASM-PRIMER.md) · [TIPS-AND-TRICKS.md](./TIPS-AND-TRICKS.md) |
-| **IDE & MCP** | [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md) — local stdio · [ide/REMOTE-MCP-SETUP.md](./ide/REMOTE-MCP-SETUP.md) — Code Engine SSE |
+| **IDE & MCP** | [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md) — local stdio · [ide/REMOTE-MCP-SETUP.md](./ide/REMOTE-MCP-SETUP.md) — Code Engine SSE · [ide/EXTENSION-REMOTE-MCP.md](./ide/EXTENSION-REMOTE-MCP.md) — extension remote mode |
 | **Cloud deployment** | [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md) · [Code Engine deploy](../../deployments/code-engine/README.md) (public) |
 | **Contributing** | [../CONTRIBUTING.md](../CONTRIBUTING.md) · [../CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) |
 
@@ -32,10 +32,12 @@ quantum computing docs, architecture, tips and tricks, openqasm guide, deploymen
 |-------|------------|
 | **New to OpenQASM** | [OPENQASM-PRIMER.md](./OPENQASM-PRIMER.md) |
 | **MCP in your AI IDE (local)** | [ide/LOCAL-MCP-SETUP.md](./ide/LOCAL-MCP-SETUP.md) |
-| **MCP remote (Code Engine)** | [ide/REMOTE-MCP-SETUP.md](./ide/REMOTE-MCP-SETUP.md) |
+| **MCP remote (Code Engine)** | [ide/REMOTE-MCP-SETUP.md](./ide/REMOTE-MCP-SETUP.md) · run `deployments/code-engine/setup-remote-mcp.sh` |
+| **Extension remote mode** | [ide/EXTENSION-REMOTE-MCP.md](./ide/EXTENSION-REMOTE-MCP.md) · Diagnostics → MCP mode **remote** |
 | **System design** | [ARCHITECTURE.md](./ARCHITECTURE.md) |
 | **Backend & workflow tips** | [TIPS-AND-TRICKS.md](./TIPS-AND-TRICKS.md) |
-| **Deploy remote MCP** | [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md) |
+| **Deploy remote MCP** | [deployments/DEPLOYMENT-SCENARIOS.md](./deployments/DEPLOYMENT-SCENARIOS.md) — CE, Docker, npm, WxO, CI |
+| **Local bridge (Podman)** | [DEPLOYMENT-SCENARIOS.md § Scenario 6](./deployments/DEPLOYMENT-SCENARIOS.md#scenario-6-local-podmandocker-bridge-dev-gateway) |
 | **Repo file map** | [PROJECT-STRUCTURE.md](./PROJECT-STRUCTURE.md) |
 | **VS Code extension** | [../extension/README.md](../extension/README.md) |
 

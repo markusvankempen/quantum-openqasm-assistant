@@ -14,7 +14,7 @@ typescript, nodejs, histogram, job polling, code engine, sse, stdio, quantum sim
 [![OpenQASM](https://img.shields.io/badge/OpenQASM-2.0-512BD4)](https://openqasm.com/)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-00A67E)](https://modelcontextprotocol.io/)
 [![IBM Quantum](https://img.shields.io/badge/IBM-Quantum-0f62fe)](https://quantum.ibm.com/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 <p align="center">
   <img src="extension/media/icon.png" alt="Quantum OpenQASM Assistant — atomic icon with cyan nucleus and purple orbits" width="128" />
@@ -213,7 +213,7 @@ Please read our **[CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)**.
 
 ## License
 
-[MIT License](./LICENSE) — Copyright (c) 2026 Markus van Kempen
+[Apache License 2.0](./LICENSE)
 
 ---
 

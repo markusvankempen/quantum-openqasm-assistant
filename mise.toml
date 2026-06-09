@@ -16,9 +16,9 @@ depends = ["install"]
 run = "cd extension && node esbuild.js"
 
 [tasks.package]
-description = "Build VSIX package"
+description = "Build production VSIX package"
 depends = ["build"]
-run = "cd extension && npm run package"
+run = "cd extension && npm run bundle:production && npm run package"
 
 [tasks.test-e2e]
 description = "End-to-end IBM Quantum smoke test"
@@ -29,6 +29,14 @@ run = "bash scripts/test-quantum-e2e.sh"
 description = "Alias for end-to-end smoke test"
 run = "mise run test-e2e"
 
+[tasks.check-secrets]
+description = "Scan tracked files for leaked API keys and secrets"
+run = "bash scripts/check-secrets.sh"
+
 [tasks.ci]
-description = "Pre-push checks: build + e2e smoke test"
-run = "mise run build && mise run test-e2e"
+description = "Pre-push checks: secrets scan + build + e2e smoke test"
+run = "mise run check-secrets && mise run build && mise run test-e2e"
+
+[tasks.publish-mcp]
+description = "Publish MCP server to registry (npm must be live first)"
+run = "cd packages/quantum-openqasm-mcp && npm run publish:mcp"

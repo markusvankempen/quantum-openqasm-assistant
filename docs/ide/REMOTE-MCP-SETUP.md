@@ -15,6 +15,28 @@ remote quantum mcp, code engine openqasm, mcp-remote, server-side credentials
 
 ---
 
+## One-command setup
+
+```bash
+cd deployments/code-engine
+./setup-remote-mcp.sh
+```
+
+This script resolves `CE_ENDPOINT`, merges `quantum-openqasm-mcp-remote` into your IDE `mcp.json` (with backup), and runs `/health` + `/test/api/run`.
+
+| Flag | Purpose |
+|------|---------|
+| `--ide cursor,vscode` | Target specific IDEs |
+| `--ide all` | Cursor, VS Code, Bob, Antigravity, Claude |
+| `--workspace` | Also write repo `.vscode/mcp.json` |
+| `--proxy` | Cursor: `uvx mcp-proxy` instead of `npx mcp-remote` |
+| `--check-only` | Health check only |
+| `--dry-run` | Preview without writing |
+
+Procedure: **[deployments/code-engine/IDE-SETUP.md](../../deployments/code-engine/IDE-SETUP.md)**
+
+---
+
 ## What you get
 
 | Feature | Remote (Code Engine) | Local (stdio) |
@@ -283,16 +305,28 @@ Restart Claude Desktop after saving.
 
 ## Step 7 — Quantum VS Code extension (remote mode)
 
-Use the extension **without** local stdio when the gateway is deployed:
+Use the extension **without** local stdio when the gateway is deployed.
+
+📖 **[Full extension remote guide](./EXTENSION-REMOTE-MCP.md)**
 
 | Setting | Value |
 |---------|-------|
 | `quantumAssistant.mcpMode` | `remote` |
 | `quantumAssistant.remoteMcpUrl` | `https://<CE_ENDPOINT>/sse` |
 
-**Via UI:** Quantum → **Settings & Diagnostics** → set MCP mode **Remote** → paste SSE URL → **Save Configuration**.
+**Via Diagnostics UI:**
 
-The extension connects via `SSEClientTransport` to the same gateway as IDE MCP clients.
+1. **Quantum → Settings & Diagnostics**
+2. MCP Mode → **remote (SSE URL)**
+3. Paste SSE URL → **Test Remote Gateway** (health + 10 tools)
+4. **Save Configuration**
+5. Optional: **Setup Remote MCP for AI IDEs** (same URL for Cursor/VS Code MCP panel)
+
+**Via Command Palette:**
+
+- `Quantum: Setup Remote MCP (Code Engine SSE)` — writes `quantum-openqasm-mcp-remote` to IDE configs
+
+The extension connects via `SSEClientTransport` to the same gateway as IDE MCP clients. **IBM API keys are not required** in extension settings for Quantum Lab in remote mode.
 
 ---
 

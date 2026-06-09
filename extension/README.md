@@ -8,6 +8,7 @@ model context protocol, ai assistant, quantum hardware, qiskit, quantum programm
 -->
 
 [![VS Code Extension](https://img.shields.io/badge/VS%20Code-Extension-007ACC?logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant)
+[![npm MCP](https://img.shields.io/npm/v/@markusvankempen/quantum-openqasm-mcp.svg?label=npm%20MCP)](https://www.npmjs.com/package/@markusvankempen/quantum-openqasm-mcp)
 [![OpenQASM](https://img.shields.io/badge/OpenQASM-2.0-512BD4)](https://openqasm.com/)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-00A67E)](https://modelcontextprotocol.io/)
 [![IBM Quantum](https://img.shields.io/badge/IBM-Quantum-0f62fe)](https://quantum.ibm.com/)
@@ -30,7 +31,9 @@ model context protocol, ai assistant, quantum hardware, qiskit, quantum programm
 | **Live job polling** | Auto-polls job status every 15s with elapsed time |
 | **Histogram results** | Measurement counts visualized as a bar chart with Bell-state fidelity |
 | **Ask AI prompts** | Circuit-writing and MCP tool prompts sent to IDE AI chat |
-| **MCP local/remote** | Connects to a local spawned server or a remote SSE URL |
+| **MCP local/remote** | Local stdio npm MCP or **remote Code Engine SSE** (no local API keys) |
+| **Remote gateway test** | Diagnostics panel tests `/health` + MCP `tools/list` on Code Engine |
+| **Remote IDE setup** | One-click register `quantum-openqasm-mcp-remote` for Cursor, VS Code, Bob, Antigravity |
 | **Multi-IDE MCP setup** | One-click register `quantum-openqasm-mcp` in Cursor, VS Code, Bob & Antigravity |
 | **Diagnostics panel** | Test auth, backends, and save all settings from the UI |
 
@@ -56,8 +59,12 @@ Open **Settings** (`Cmd+,`) and search `quantumAssistant`, or use **Quantum: Ope
 | `ibmServiceCrn` | Service CRN from your IBM Quantum instance |
 | `ibmEndpoint` | Default: `https://us-east.quantum-computing.cloud.ibm.com` |
 | `defaultBackend` | `ibm_fez` / `ibm_marrakesh` / `ibm_kingston` |
-| `mcpMode` | `local` (spawn server.js) or `remote` (SSE URL) |
-| `remoteMcpUrl` | Remote MCP endpoint (when `mcpMode = remote`) |
+| `mcpMode` | `local` (spawn npm MCP) or `remote` (Code Engine SSE) |
+| `remoteMcpUrl` | Remote SSE URL when `mcpMode = remote` (e.g. `https://…codeengine…/sse`) |
+
+**Remote mode (Code Engine):** open **Diagnostics** → MCP Mode **remote** → paste SSE URL → **Test Remote Gateway** → **Save**. No IBM API key needed on your machine for Quantum Lab.
+
+📖 **[Extension remote MCP guide](../docs/ide/EXTENSION-REMOTE-MCP.md)** · **[Code Engine deploy](../deployments/code-engine/README.md)**
 
 ### 3. Use
 
@@ -76,7 +83,9 @@ Open **Settings** (`Cmd+,`) and search `quantumAssistant`, or use **Quantum: Ope
 | `Quantum: Submit Current OpenQASM File` | Submit the active `.qasm` editor file |
 | `Quantum: Check Job Status` | Fetch results for a known job ID |
 | `Quantum: Open Diagnostics Panel` | Configure credentials and test connection |
-| `Quantum: Setup MCP (Cursor / VS Code / Bob / Antigravity)` | Register local MCP in all supported AI IDEs |
+| `Quantum: Setup Local MCP (Cursor / VS Code / Bob / Antigravity)` | Register local stdio MCP with your credentials |
+| `Quantum: Setup Remote MCP (Code Engine SSE)` | Register `quantum-openqasm-mcp-remote` SSE URL for AI IDEs |
+| `Quantum: Update MCP npm Package` | Install latest `@markusvankempen/quantum-openqasm-mcp` from npm |
 | `Quantum: Load OpenQASM 2.0 Circuit` | Open a `.qasm` file into the editor and Quantum Lab |
 | `Quantum: Save OpenQASM 2.0 Circuit` | Save the active `.qasm` file or circuit from Quantum Lab |
 
@@ -84,9 +93,28 @@ Open **Settings** (`Cmd+,`) and search `quantumAssistant`, or use **Quantum: Ope
 
 ## MCP Server
 
-The extension spawns `out/server.js` as a local MCP server (stdio transport) and passes IBM credentials via environment variables. For remote deployments, set `mcpMode = remote` and provide a `remoteMcpUrl` pointing to an SSE-compatible MCP server.
+**Local mode:** uses **`@markusvankempen/quantum-openqasm-mcp` from npm** (global install or `npx`) for Quantum Lab and submit. Set `quantumAssistant.useNpmMcp = false` to use bundled `out/server.js` instead.
 
-Standalone npm package: [`@markusvankempen/quantum-openqasm-mcp`](https://github.com/markusvankempen/quantum-openqasm-assistant)
+**Remote mode:** set `mcpMode = remote` and `remoteMcpUrl` to your Code Engine `/sse` endpoint. The extension uses `SSEClientTransport` — credentials stay on the gateway. Use **Diagnostics → Test Remote Gateway** before running circuits.
+
+```mermaid
+flowchart LR
+    Ext[Extension Quantum Lab]
+    Local[Local npm MCP stdio]
+    Remote[Code Engine /sse]
+    IBM[IBM Quantum]
+
+    Ext -->|mcpMode local| Local --> IBM
+    Ext -->|mcpMode remote| Remote --> IBM
+```
+
+Standalone npm package (stdio MCP, no UI):
+
+```bash
+npx @markusvankempen/quantum-openqasm-mcp
+```
+
+Docs: [npm package README](https://www.npmjs.com/package/@markusvankempen/quantum-openqasm-mcp) · [GitHub](https://github.com/markusvankempen/quantum-openqasm-assistant/tree/master/packages/quantum-openqasm-mcp)
 
 ### AI IDE MCP integration (Cursor, VS Code, Bob, Antigravity)
 
@@ -96,6 +124,8 @@ Use **Quantum: Setup MCP** (sidebar or Diagnostics panel) to register `quantum-o
 |----------|-------------|
 | [Main README](../README.md) | Project overview, architecture, quick start |
 | [Local MCP setup](../docs/ide/LOCAL-MCP-SETUP.md) | Cursor, VS Code, Bob, Antigravity stdio config |
+| [Extension remote MCP](../docs/ide/EXTENSION-REMOTE-MCP.md) | Quantum Lab on Code Engine SSE |
+| [Remote MCP setup](../docs/ide/REMOTE-MCP-SETUP.md) | IDE `mcp.json` for Code Engine |
 | [Deployment scenarios](../docs/deployments/DEPLOYMENT-SCENARIOS.md) | Local, Code Engine, Docker, hybrid |
 | [Project structure](../docs/PROJECT-STRUCTURE.md) | Full repo layout |
 
@@ -106,9 +136,33 @@ Use **Quantum: Setup MCP** (sidebar or Diagnostics panel) to register `quantum-o
 ```bash
 cd extension
 npm install
-node esbuild.js          # bundle to out/
-npm run package          # build VSIX
+node esbuild.js              # dev bundle → out/
+node esbuild.js --production   # minified, no sourcemaps (for publish)
+npm run package              # → quantum-openqasm-assistant-<version>.vsix
 ```
+
+## Publish (Marketplace & Open VSX)
+
+From the `extension/` directory after a production build:
+
+```bash
+# 1. Bump version in package.json, then:
+npm run bundle:production
+
+# 2. Package VSIX
+npm run package
+
+# 3a. VS Code Marketplace (publisher: markusvankempen)
+npx @vscode/vsce login markusvankempen
+npm run publish:vsce
+
+# 3b. Open VSX (Cursor / VSCodium)
+npx ovsx login
+npm run publish:ovsx
+# or: npx ovsx publish quantum-openqasm-assistant-<version>.vsix --no-dependencies
+```
+
+**VSIX must include:** `out/extension.js`, `out/server.js`, `scripts/run-mcp-server.mjs`, `media/`, `docs/`, `resources/`, `LICENSE`, `README.md`.
 
 Repository: [github.com/markusvankempen/quantum-openqasm-assistant](https://github.com/markusvankempen/quantum-openqasm-assistant)
 

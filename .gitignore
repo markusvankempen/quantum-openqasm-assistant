@@ -15,6 +15,12 @@
 !/CODE_OF_CONDUCT.md
 !/mise.toml
 !/README.md
+!.env.example
+
+# Secret scan (safe to publish — no credentials)
+!/scripts/
+/scripts/*
+!/scripts/check-secrets.sh
 
 # Published docs
 !/docs/
@@ -28,6 +34,7 @@
 /docs/ide/*
 !/docs/ide/LOCAL-MCP-SETUP.md
 !/docs/ide/REMOTE-MCP-SETUP.md
+!/docs/ide/EXTENSION-REMOTE-MCP.md
 !/docs/deployments/
 /docs/deployments/*
 !/docs/deployments/DEPLOYMENT-SCENARIOS.md
@@ -52,6 +59,8 @@
 !/deployments/code-engine/deploy-ibmcloud.sh
 !/deployments/code-engine/generate-mcp-configs.sh
 !/deployments/code-engine/check-remote-health.sh
+!/deployments/code-engine/setup-remote-mcp.sh
+!/deployments/code-engine/IDE-SETUP.md
 !/deployments/code-engine/Dockerfile
 !/deployments/code-engine/.dockerignore
 !/deployments/code-engine/code-engine.yaml
@@ -80,7 +89,24 @@ internal/
 .env.*
 **/.env
 **/.env.*
+!**/.env.example
 deployments/code-engine/bridge.mjs
 
 # Local MCP configs with resolved CE_ENDPOINT (use mcp.json.example + generate-mcp-configs.sh)
 .vscode/mcp.json
+**/mcp-configs/deployed/CE_ENDPOINT.txt
+**/mcp-configs/deployed/*.json
+extension/.env
+
+# Extension source & build output (private dev repo only)
+extension/src/
+extension/out/
+extension/node_modules/
+extension/package.json
+extension/package-lock.json
+extension/esbuild.js
+extension/tsconfig.json
+extension/scripts/
+extension/media/*.js
+extension/docs/
+packages/

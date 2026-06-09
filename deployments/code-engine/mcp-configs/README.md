@@ -12,7 +12,8 @@ echo "$CE_ENDPOINT"
 
 Replace `<CE_ENDPOINT>` in template files with that value (hostname only, no trailing slash).
 
-📖 **Full walkthrough:** [../../docs/ide/REMOTE-MCP-SETUP.md](../../docs/ide/REMOTE-MCP-SETUP.md)
+📖 **Full walkthrough:** [../../docs/ide/REMOTE-MCP-SETUP.md](../../docs/ide/REMOTE-MCP-SETUP.md)  
+⚡ **One command:** `../setup-remote-mcp.sh` · [IDE-SETUP.md](../IDE-SETUP.md)
 
 ---
 

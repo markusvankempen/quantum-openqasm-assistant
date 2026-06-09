@@ -7,8 +7,8 @@
 # Pattern: code-engine-mcp-server bridge + dashboard UI
 #
 # Usage:
-#   IBMCLOUD_API_KEY=xxx \
-#   IBM_API_KEY=xxx \
+#   IBMCLOUD_API_KEY=your_ibm_cloud_api_key \
+#   IBM_API_KEY=your_quantum_api_key \
 #   IBM_SERVICE_CRN=crn:v1:... \
 #   ./deploy-ibmcloud.sh
 #

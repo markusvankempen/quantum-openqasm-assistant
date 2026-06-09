@@ -114,7 +114,9 @@ node esbuild.js
 
 - Match existing TypeScript style in `extension/src/`.
 - Use OpenQASM **2.0 ISA** format for IBM hardware circuits.
-- Use placeholders in docs — never real API keys or CRNs.
+- Use placeholders in docs — never real API keys or CRNs (`your_*`, `xxx`, `<CE_ENDPOINT>`).
+- Before publishing to GitHub, run `bash scripts/check-secrets.sh` (must pass).
+- Never commit `.env`, `mcp-configs/deployed/*.json`, or resolved `CE_ENDPOINT.txt`.
 - Keep MCP tool names stable: `list_backends`, `submit_qasm_job`, `get_job_results`, etc.
 
 ---

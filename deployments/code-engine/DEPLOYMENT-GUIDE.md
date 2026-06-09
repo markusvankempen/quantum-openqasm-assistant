@@ -118,8 +118,8 @@ The container runs **`bridge.mjs`**, not the MCP server HTTP directly:
 ```bash
 cd deployments/code-engine
 
-IBMCLOUD_API_KEY=xxx \
-IBM_API_KEY=xxx \
+IBMCLOUD_API_KEY=your_ibm_cloud_api_key \
+IBM_API_KEY=your_quantum_api_key \
 IBM_SERVICE_CRN=crn:v1:bluemix:public:quantum-computing:... \
 IBM_QUANTUM_ENDPOINT=https://us-east.quantum-computing.cloud.ibm.com \
 IBM_QUANTUM_BACKEND=ibm_fez \
