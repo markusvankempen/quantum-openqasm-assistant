@@ -211,6 +211,38 @@ See **[docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** for the complet
 
 ---
 
+## Qiskit Integration
+
+Design circuits in **Qiskit**, export to **OpenQASM 2.0**, and run on IBM Quantum hardware via MCP or Quantum Lab:
+
+```python
+from qiskit import QuantumCircuit, qasm2
+
+qc = QuantumCircuit(2, 2)
+qc.h(0)
+qc.cx(0, 1)
+qc.measure([0, 1], [0, 1])
+
+print(qasm2.dumps(qc))  # → submit via MCP or paste into Quantum Lab
+```
+
+```text
+OPENQASM 2.0;
+include "qelib1.inc";
+qreg q[2]; creg c[2];
+h q[0];
+cx q[0],q[1];
+measure q[0] -> c[0];
+measure q[1] -> c[1];
+```
+
+**No Qiskit dependency at runtime** — the MCP server speaks OpenQASM + IBM Quantum REST directly.
+
+- Full guide: [docs/QISKIT-INTEGRATION.md](./docs/QISKIT-INTEGRATION.md)
+- Example script: [examples/qiskit-bell-export.py](./examples/qiskit-bell-export.py)
+
+---
+
 ## Security
 
 - API keys live in VS Code settings or `~/.quantum-openqasm-mcp/.env` — never in git
