@@ -123,7 +123,7 @@ IBM_API_KEY=your_quantum_api_key \
 IBM_SERVICE_CRN=crn:v1:bluemix:public:quantum-computing:... \
 IBM_QUANTUM_ENDPOINT=https://us-east.quantum-computing.cloud.ibm.com \
 IBM_QUANTUM_BACKEND=ibm_fez \
-QUANTUM_MCP_NPM_VERSION=1.7.2 \
+QUANTUM_MCP_NPM_VERSION=1.7.4 \
 ./deploy.sh
 ```
 
@@ -249,7 +249,7 @@ curl -sS "${CE_ENDPOINT}/health" | jq .
 curl -sS "${CE_ENDPOINT}/stats" | jq .
 
 # Redeploy after npm package update
-QUANTUM_MCP_NPM_VERSION=1.7.3 ./deploy.sh
+QUANTUM_MCP_NPM_VERSION=1.7.4 ./deploy.sh
 ```
 
 ---

@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "qiskit-docs": {
+      "command": "uvx",
+      "args": ["qiskit-docs-mcp-server"]
+    },
+    "qiskit": {
+      "command": "uvx",
+      "args": ["qiskit-mcp-server"]
+    },
+    "qiskit-ibm-runtime": {
+      "command": "uvx",
+      "args": ["qiskit-ibm-runtime-mcp-server"],
+      "env": {
+        "QISKIT_IBM_TOKEN": "REPLACE_WITH_IBM_QUANTUM_TOKEN"
+      }
+    },
+    "quantum-openqasm-mcp": {
+      "command": "npx",
+      "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"]
+    }
+  }
+}

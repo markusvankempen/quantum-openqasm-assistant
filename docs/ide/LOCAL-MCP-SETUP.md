@@ -25,6 +25,8 @@ Use the **Quantum OpenQASM Assistant** VS Code extension:
 
 The setup button writes credentials to `~/.quantum-openqasm-mcp/.env` and registers `quantum-openqasm-mcp` in **all** IDE config locations below.
 
+**Qiskit workflows:** use the **[Qiskit Developer Pack](./QISKIT-DEVELOPER-PACK.md)** to also install [Qiskit MCP Servers](https://github.com/Qiskit/mcp-servers) (docs + circuit building) alongside OpenQASM execution.
+
 ---
 
 ## Architecture

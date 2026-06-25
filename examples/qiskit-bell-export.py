@@ -4,6 +4,9 @@ Export a Bell-state circuit from Qiskit to OpenQASM 2.0 for Quantum OpenQASM Ass
 
 Requires: pip install qiskit
 
+Note: logical gates (h, cx) are not IBM-hardware-ready — use
+examples/qiskit-bell-transpile-export.py before submit_qasm_job on real QPUs.
+
 Usage:
     python examples/qiskit-bell-export.py
     # writes bell-from-qiskit.qasm in the current directory

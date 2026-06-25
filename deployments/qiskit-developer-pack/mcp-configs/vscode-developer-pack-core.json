@@ -1,0 +1,19 @@
+{
+  "servers": {
+    "qiskit-docs": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["qiskit-docs-mcp-server"]
+    },
+    "qiskit": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["qiskit-mcp-server"]
+    },
+    "quantum-openqasm-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"]
+    }
+  }
+}

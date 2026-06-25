@@ -52,6 +52,12 @@ Need Lab + team remote?                → extension-remote-mcp + code-engine
 
 Modes **4** and **5** share the same gateway — see infrastructure below.
 
+### Qiskit + OpenQASM (AI agents)
+
+Use the **[Qiskit Developer Pack](./qiskit-developer-pack/README.md)** to install [Qiskit MCP Servers](https://github.com/Qiskit/mcp-servers) **and** `quantum-openqasm-mcp` in one step — docs search, Qiskit circuit building, OpenQASM hardware runs.
+
+📖 **[Qiskit Developer Pack guide](../docs/ide/QISKIT-DEVELOPER-PACK.md)**
+
 ---
 
 ## Infrastructure (where MCP runs)
@@ -79,6 +85,7 @@ deployments/
 ├── mcp-npm/                  ← mode 3
 ├── extension-remote-mcp/     ← mode 4
 ├── mcp-remote-sse/           ← mode 5
+├── qiskit-developer-pack/    ← Qiskit MCP + openqasm bundle
 ├── code-engine/              ← IBM Code Engine gateway
 ├── local-bridge/             ← dev gateway on laptop
 ├── docker-sse/               ← self-hosted container

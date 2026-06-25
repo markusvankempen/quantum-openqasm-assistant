@@ -11,6 +11,8 @@ typescript, nodejs, histogram, job polling, code engine, sse, stdio, quantum sim
 -->
 
 [![VS Code Extension](https://img.shields.io/badge/VS%20Code-Extension-007ACC?logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant)
+[![npm MCP](https://img.shields.io/npm/v/@markusvankempen/quantum-openqasm-mcp.svg?label=npm%20MCP)](https://www.npmjs.com/package/@markusvankempen/quantum-openqasm-mcp)
+[![GitHub release](https://img.shields.io/github/v/release/markusvankempen/quantum-openqasm-assistant?label=release)](https://github.com/markusvankempen/quantum-openqasm-assistant/releases)
 [![Qiskit Ecosystem](https://qisk.it/e-bd91d04b)](https://qisk.it/e)
 [![OpenQASM](https://img.shields.io/badge/OpenQASM-2.0-512BD4)](https://openqasm.com/)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-00A67E)](https://modelcontextprotocol.io/)
@@ -36,11 +38,12 @@ typescript, nodejs, histogram, job polling, code engine, sse, stdio, quantum sim
 
 Quantum OpenQASM Assistant connects AI agents and developers to **IBM Quantum** through a pure TypeScript MCP server and VS Code extension. Submit OpenQASM 2.0 ISA circuits, poll job status, and view measurement histograms — locally via stdio or remotely via SSE on IBM Code Engine.
 
-| Product | Identifier |
-|---------|------------|
-| **VS Code Extension** | `markusvankempen.quantum-openqasm-assistant` |
-| **NPM MCP Server** | `@markusvankempen/quantum-openqasm-mcp` |
-| **Public repo** | [quantum-openqasm-assistant](https://github.com/markusvankempen/quantum-openqasm-assistant) |
+| Product | Identifier | Version |
+|---------|------------|---------|
+| **VS Code Extension** | [`markusvankempen.quantum-openqasm-assistant`](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant) | **1.7.4** |
+| **NPM MCP Server** | [`@markusvankempen/quantum-openqasm-mcp`](https://www.npmjs.com/package/@markusvankempen/quantum-openqasm-mcp) | **1.7.4** |
+| **MCP Registry** | [`io.github.markusvankempen/quantum-openqasm-mcp`](https://registry.modelcontextprotocol.io/servers/io.github.markusvankempen/quantum-openqasm-mcp) | **1.7.4** |
+| **Public repo** | [quantum-openqasm-assistant](https://github.com/markusvankempen/quantum-openqasm-assistant) | tag `v1.7.4` |
 
 ```mermaid
 graph TB
@@ -89,7 +92,7 @@ sequenceDiagram
     IBM-->>Ext: measurement histogram
 ```
 
-📖 **[Documentation hub → docs/README.md](./docs/README.md)** · **[Project structure → docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** · **[OpenQASM Primer → docs/OPENQASM-PRIMER.md](./docs/OPENQASM-PRIMER.md)** · **[Tips & Tricks → docs/TIPS-AND-TRICKS.md](./docs/TIPS-AND-TRICKS.md)** · **[Architecture → docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)** · **[Local MCP setup → docs/ide/LOCAL-MCP-SETUP.md](./docs/ide/LOCAL-MCP-SETUP.md)** · **[Deployment → docs/deployments/DEPLOYMENT-SCENARIOS.md](./docs/deployments/DEPLOYMENT-SCENARIOS.md)** · **[Extension → extension/README.md](./extension/README.md)** · **[Contributing → CONTRIBUTING.md](./CONTRIBUTING.md)**
+📖 **[Documentation hub → docs/README.md](./docs/README.md)** · **[Project structure → docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** · **[OpenQASM Primer → docs/OPENQASM-PRIMER.md](./docs/OPENQASM-PRIMER.md)** · **[Tips & Tricks → docs/TIPS-AND-TRICKS.md](./docs/TIPS-AND-TRICKS.md)** · **[Architecture → docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)** · **[Local MCP setup → docs/ide/LOCAL-MCP-SETUP.md](./docs/ide/LOCAL-MCP-SETUP.md)** · **[Qiskit Developer Pack → docs/ide/QISKIT-DEVELOPER-PACK.md](./docs/ide/QISKIT-DEVELOPER-PACK.md)** · **[Deployment → docs/deployments/DEPLOYMENT-SCENARIOS.md](./docs/deployments/DEPLOYMENT-SCENARIOS.md)** · **[Extension → extension/README.md](./extension/README.md)** · **[Contributing → CONTRIBUTING.md](./CONTRIBUTING.md)**
 
 > **Repository policy:** This public GitHub repo publishes overview and setup documentation. Extension **source code**, scripts, and examples live in the **private dev repo** (use `.gitignore.private` when setting it up).
 
@@ -102,7 +105,8 @@ sequenceDiagram
 | **Quantum Lab** | Interactive panel with example circuits and histogram results |
 | **OpenQASM 2.0** | IBM hardware ISA format (`rz`, `sx`, `cz` native gates) |
 | **MCP tools** | `list_backends`, `submit_qasm_job`, `get_job_status`, `get_job_results`, and more |
-| **Multi-IDE MCP** | One-click setup for Cursor, VS Code, Bob & Antigravity |
+| **Multi-IDE MCP** | One-click setup for Cursor, VS Code, Bob, Antigravity & Claude Desktop |
+| **Qiskit Developer Pack** | Bundle Qiskit MCP servers + quantum-openqasm-mcp from Diagnostics |
 | **Local / remote** | stdio MCP locally or SSE via IBM Code Engine |
 | **Diagnostics** | Test IAM auth, list backends, save credentials from the UI |
 
@@ -240,6 +244,7 @@ measure q[1] -> c[1];
 **No Qiskit dependency at runtime** — the MCP server speaks OpenQASM + IBM Quantum REST directly.
 
 - Full guide: [docs/QISKIT-INTEGRATION.md](./docs/QISKIT-INTEGRATION.md)
+- **Qiskit Developer Pack** (Qiskit MCP + OpenQASM): [docs/ide/QISKIT-DEVELOPER-PACK.md](./docs/ide/QISKIT-DEVELOPER-PACK.md)
 - Example script: [examples/qiskit-bell-export.py](./examples/qiskit-bell-export.py)
 
 ---

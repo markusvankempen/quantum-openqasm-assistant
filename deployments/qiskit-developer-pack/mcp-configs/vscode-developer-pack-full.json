@@ -1,0 +1,27 @@
+{
+  "servers": {
+    "qiskit-docs": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["qiskit-docs-mcp-server"]
+    },
+    "qiskit": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["qiskit-mcp-server"]
+    },
+    "qiskit-ibm-runtime": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["qiskit-ibm-runtime-mcp-server"],
+      "env": {
+        "QISKIT_IBM_TOKEN": "REPLACE_WITH_IBM_QUANTUM_TOKEN"
+      }
+    },
+    "quantum-openqasm-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"]
+    }
+  }
+}

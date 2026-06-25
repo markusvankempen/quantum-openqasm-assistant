@@ -9,15 +9,16 @@ model context protocol, ai assistant, quantum hardware, qiskit, quantum programm
 
 [![VS Code Extension](https://img.shields.io/badge/VS%20Code-Extension-007ACC?logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant)
 [![npm MCP](https://img.shields.io/npm/v/@markusvankempen/quantum-openqasm-mcp.svg?label=npm%20MCP)](https://www.npmjs.com/package/@markusvankempen/quantum-openqasm-mcp)
+[![GitHub release](https://img.shields.io/github/v/release/markusvankempen/quantum-openqasm-assistant?label=release)](https://github.com/markusvankempen/quantum-openqasm-assistant/releases)
 [![OpenQASM](https://img.shields.io/badge/OpenQASM-2.0-512BD4)](https://openqasm.com/)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-00A67E)](https://modelcontextprotocol.io/)
 [![IBM Quantum](https://img.shields.io/badge/IBM-Quantum-0f62fe)](https://quantum.ibm.com/)
 
 > **VS Code / Cursor extension** for **IBM Quantum** — run **OpenQASM 2.0** `.qasm` circuits on real **quantum hardware** via the **Model Context Protocol (MCP)**. **Quantum Lab** panel, **job polling**, **histogram** results, **Diagnostics** UI, and one-click **MCP registration** for Cursor, VS Code, Bob & Antigravity.
 
-**Publisher:** `markusvankempen` · **Extension ID:** `quantum-openqasm-assistant` · **NPM MCP:** `@markusvankempen/quantum-openqasm-mcp`
+**Publisher:** `markusvankempen` · **Extension ID:** `quantum-openqasm-assistant` · **Version:** **1.7.4** · **NPM MCP:** `@markusvankempen/quantum-openqasm-mcp@1.7.4`
 
-**Search terms:** `vscode quantum extension` · `openqasm vscode` · `ibm quantum vscode` · `quantum lab` · `submit qasm` · `mcp quantum` · `cursor quantum` · `bell state hardware`
+**Search terms:** `vscode quantum extension` · `openqasm vscode` · `ibm quantum vscode` · `quantum lab` · `submit qasm` · `mcp quantum` · `cursor quantum` · `qiskit developer pack` · `claude desktop mcp` · `bell state hardware`
 
 ---
 
@@ -34,8 +35,9 @@ model context protocol, ai assistant, quantum hardware, qiskit, quantum programm
 | **MCP local/remote** | Local stdio npm MCP or **remote Code Engine SSE** (no local API keys) |
 | **Remote gateway test** | Diagnostics panel tests `/health` + MCP `tools/list` on Code Engine |
 | **Remote IDE setup** | One-click register `quantum-openqasm-mcp-remote` for Cursor, VS Code, Bob, Antigravity |
-| **Multi-IDE MCP setup** | One-click register `quantum-openqasm-mcp` in Cursor, VS Code, Bob & Antigravity |
-| **Diagnostics panel** | Test auth, backends, and save all settings from the UI |
+| **Multi-IDE MCP setup** | One-click register `quantum-openqasm-mcp` in Cursor, VS Code, Bob, Antigravity & Claude Desktop |
+| **Qiskit Developer Pack** | Diagnostics button bundles Qiskit MCP servers + quantum-openqasm-mcp (core/full tier) |
+| **Diagnostics panel** | Test auth, backends, Python Qiskit stack, and save all settings from the UI |
 
 ---
 

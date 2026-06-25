@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "qiskit-docs": {
+      "command": "uvx",
+      "args": ["qiskit-docs-mcp-server"]
+    },
+    "qiskit": {
+      "command": "uvx",
+      "args": ["qiskit-mcp-server"]
+    },
+    "quantum-openqasm-mcp": {
+      "command": "npx",
+      "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"]
+    }
+  }
+}

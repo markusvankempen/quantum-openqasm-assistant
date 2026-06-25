@@ -227,7 +227,7 @@ Optional:
 ```bash
 IBM_QUANTUM_ENDPOINT=https://us-east.quantum-computing.cloud.ibm.com
 IBM_QUANTUM_BACKEND=ibm_fez
-QUANTUM_MCP_NPM_VERSION=1.7.2
+QUANTUM_MCP_NPM_VERSION=1.7.4
 CE_PROJECT=your-ce-project
 APP_NAME=quantum-mcp-remote
 ```

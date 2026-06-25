@@ -37,6 +37,8 @@
 !/docs/ide/LOCAL-MCP-SETUP.md
 !/docs/ide/REMOTE-MCP-SETUP.md
 !/docs/ide/EXTENSION-REMOTE-MCP.md
+!/docs/ide/QISKIT-DEVELOPER-PACK.md
+!/docs/ide/DIAGNOSTICS-UI.md
 !/docs/deployments/
 /docs/deployments/*
 !/docs/deployments/DEPLOYMENT-SCENARIOS.md
@@ -90,6 +92,16 @@
 !/deployments/ci-cd/
 /deployments/ci-cd/*
 !/deployments/ci-cd/README.md
+# Qiskit Developer Pack (public)
+!/deployments/qiskit-developer-pack/
+/deployments/qiskit-developer-pack/*
+!/deployments/qiskit-developer-pack/README.md
+!/deployments/qiskit-developer-pack/setup-qiskit-developer-pack.sh
+!/deployments/qiskit-developer-pack/mcp-configs/
+/deployments/qiskit-developer-pack/mcp-configs/*
+!/deployments/qiskit-developer-pack/mcp-configs/*.json
+!/deployments/qiskit-developer-pack/mcp-configs/deployed/
+/deployments/qiskit-developer-pack/mcp-configs/deployed/*
 
 # Code Engine deploy (public) — bridge.mjs stays private (see deployments/code-engine/README.md)
 !/deployments/code-engine/

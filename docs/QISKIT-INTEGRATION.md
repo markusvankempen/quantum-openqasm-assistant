@@ -32,9 +32,12 @@ flowchart LR
 
 ## Example: Bell state from Qiskit
 
-**Requirements:** `pip install qiskit` — for **export only**; not a runtime dependency of this project.
+**Requirements:** `qiskit` (+ `qiskit-ibm-runtime` to transpile for IBM hardware). Install via [Qiskit Developer Pack](./ide/QISKIT-DEVELOPER-PACK.md) setup script.
 
-Script: [`examples/qiskit-bell-export.py`](../examples/qiskit-bell-export.py)
+| Script | Purpose |
+|--------|---------|
+| [`examples/qiskit-bell-export.py`](../examples/qiskit-bell-export.py) | Simple export (logical gates — **not** hardware-ready alone) |
+| [`examples/qiskit-bell-transpile-export.py`](../examples/qiskit-bell-transpile-export.py) | **Transpile for IBM backend → OpenQASM 2.0** (use before submit) |
 
 ```python
 from qiskit import QuantumCircuit, qasm2
@@ -48,7 +51,7 @@ print(qasm2.dumps(qc))
 qasm2.dump(qc, "bell-from-qiskit.qasm")
 ```
 
-Typical exported OpenQASM 2.0 (Bell state):
+Typical exported OpenQASM 2.0 (Bell state, **logical gates — transpile before IBM hardware**):
 
 ```qasm
 OPENQASM 2.0;
@@ -61,12 +64,35 @@ measure q[0] -> c[0];
 measure q[1] -> c[1];
 ```
 
-Run the exporter:
+Run the exporters:
 
 ```bash
-pip install qiskit
-python examples/qiskit-bell-export.py
+# Developer Pack — offers to install qiskit + qiskit-ibm-runtime
+./deployments/qiskit-developer-pack/setup-qiskit-developer-pack.sh --install-python-deps --yes
+
+# Hardware-ready export (uses IBM_SERVICE_CRN + IBM_API_KEY from ~/.quantum-openqasm-mcp/.env)
+~/.quantum-openqasm-mcp/qiskit-venv/bin/python examples/qiskit-bell-transpile-export.py
 ```
+
+### Transpile before submit
+
+IBM QPUs require **native gates**. Submitting raw `h` / `cx` QASM fails with:
+
+```text
+The instruction h on qubits (0,) is not supported by the target system.
+Transpile your circuits for the target before submitting a primitive query.
+```
+
+After transpile + submit to **ibm_marrakesh** (job example `d8uk065posuc738qa6kg`, 4096 shots):
+
+| State | Count | ~% |
+|-------|------:|---:|
+| `\|11⟩` | 1943 | 47% |
+| `\|00⟩` | 1867 | 46% |
+| `\|10⟩` | 203 | 5% |
+| `\|01⟩` | 83 | 2% |
+
+Full agent workflow: [Qiskit Developer Pack — worked example](./ide/QISKIT-DEVELOPER-PACK.md#worked-example-bell-state-on-ibm-hardware)
 
 ---
 
@@ -83,6 +109,16 @@ python examples/qiskit-bell-export.py
 1. **Quantum → Setup MCP** (or see [Local MCP setup](./ide/LOCAL-MCP-SETUP.md))
 2. In chat: *"Submit bell-from-qiskit.qasm to the least busy simulator with 4096 shots"*
 
+### Option B+ — Qiskit Developer Pack (recommended for Qiskit workflows)
+
+Install [Qiskit MCP Servers](https://github.com/Qiskit/mcp-servers) **and** OpenQASM execution together:
+
+```bash
+./deployments/qiskit-developer-pack/setup-qiskit-developer-pack.sh --ide cursor
+```
+
+Then ask the agent to search docs, build a circuit in Qiskit, export OpenQASM 2.0, and submit via `quantum-openqasm-mcp`. See [Qiskit Developer Pack](./ide/QISKIT-DEVELOPER-PACK.md).
+
 ### Option C — Remote team gateway
 
 Deploy [Code Engine](../deployments/code-engine/README.md) and use [remote MCP](../deployments/mcp-remote-sse/README.md) — IBM credentials stay on the server.
@@ -97,7 +133,7 @@ Deploy [Code Engine](../deployments/code-engine/README.md) and use [remote MCP](
 | OpenQASM 2.0 payload | `submit_qasm_job` MCP tool / Quantum Lab |
 | Backend selection | `list_backends` / Lab backend picker |
 
-Circuits must be **OpenQASM 2.0** with `include "qelib1.inc"`. Qiskit features that cannot export to OpenQASM 2 (e.g. some dynamic circuits) raise `QASM2ExportError` — fix the circuit in Qiskit before submitting here.
+Circuits must be **OpenQASM 2.0** with `include "qelib1.inc"` and **native gates for the target backend** (transpile in Qiskit before `qasm2.dumps`, or use [`qiskit-bell-transpile-export.py`](../examples/qiskit-bell-transpile-export.py)). Qiskit features that cannot export to OpenQASM 2 (e.g. some dynamic circuits) raise `QASM2ExportError` — fix the circuit in Qiskit before submitting here.
 
 ---
 
