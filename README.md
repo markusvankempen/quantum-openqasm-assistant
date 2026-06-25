@@ -11,6 +11,7 @@ typescript, nodejs, histogram, job polling, code engine, sse, stdio, quantum sim
 -->
 
 [![VS Code Extension](https://img.shields.io/badge/VS%20Code-Extension-007ACC?logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant)
+[![Qiskit Ecosystem](https://qisk.it/e-bd91d04b)](https://qisk.it/e)
 [![OpenQASM](https://img.shields.io/badge/OpenQASM-2.0-512BD4)](https://openqasm.com/)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-00A67E)](https://modelcontextprotocol.io/)
 [![IBM Quantum](https://img.shields.io/badge/IBM-Quantum-0f62fe)](https://quantum.ibm.com/)
