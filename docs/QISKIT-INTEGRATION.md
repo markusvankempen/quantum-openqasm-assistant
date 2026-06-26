@@ -2,14 +2,15 @@
 
 <!--
 SEO: Qiskit OpenQASM export | IBM Quantum Sampler V2 | quantum circuit workflow
-qiskit qasm2 dumps, openqasm 2.0 ibm hardware, mcp quantum assistant
+qiskit qasm2 dumps, openqasm 2.0 ibm hardware, mcp quantum assistant, qiskit lab,
+qiskit-ibm-transpiler, ai transpilation, quantum lab panel
 -->
 
-> **Quantum OpenQASM Assistant** does not depend on the Qiskit Python package at runtime. It **complements Qiskit** by taking **OpenQASM 2.0** circuits — exported from Qiskit — and submitting them to **IBM Quantum** via the **Sampler V2** REST API.
+> **Quantum OpenQASM Assistant** does not depend on the Qiskit Python package at runtime. It **complements Qiskit** by taking **OpenQASM 2.0** circuits — exported from Qiskit — and submitting them to **IBM Quantum** via the **Sampler V2** REST API. Starting with **v1.9.2**, a dedicated **Qiskit Lab** panel and **AI-powered transpilation** workflows via `qiskit-ibm-transpiler` bring end-to-end Qiskit development into AI IDEs.
 
 📖 **[Docs index](./README.md)** · **[OpenQASM primer](./OPENQASM-PRIMER.md)** · **[Local MCP](./ide/LOCAL-MCP-SETUP.md)** · **[IBM Quantum — OpenQASM 2 interop](https://docs.quantum.ibm.com/guides/interoperate-qiskit-qasm2)**
 
-**Search terms:** `qiskit openqasm export` · `qasm2 dumps` · `sampler v2` · `ibm quantum workflow`
+**Search terms:** `qiskit openqasm export` · `qasm2 dumps` · `sampler v2` · `ibm quantum workflow` · `qiskit lab` · `qiskit-ibm-transpiler`
 
 ---
 
@@ -20,13 +21,19 @@ flowchart LR
     Qiskit[Qiskit QuantumCircuit] -->|qasm2.dumps| QASM[OpenQASM 2.0]
     QASM --> Assistant[Quantum OpenQASM Assistant]
     Assistant -->|MCP or Quantum Lab| IBM[IBM Quantum Sampler V2]
+    Qiskit -->|Qiskit Lab| Aer[Aer Simulator]
+    Aer -->|export| QASM
+    QASM -->|qiskit-ibm-transpiler| Transpiled[Native ISA QASM]
+    Transpiled --> IBM
 ```
 
 | Step | Tool | Output |
 |------|------|--------|
-| 1. Design circuit | Qiskit SDK | `QuantumCircuit` |
-| 2. Export | `qiskit.qasm2.dumps()` | `.qasm` string or file |
-| 3. Submit & monitor | Extension, MCP, or AI IDE | Job ID, histogram |
+| 1. Design circuit | Qiskit SDK or **Qiskit Lab** | `QuantumCircuit` |
+| 2. Simulate locally | **Qiskit Lab** (Aer) | Histogram preview |
+| 3. Export | `qiskit.qasm2.dumps()` | `.qasm` string or file |
+| 4. Transpile for hardware | **qiskit-ibm-transpiler** (AI-powered) or Qiskit SDK | ISA-native `.qasm` |
+| 5. Submit & monitor | Extension, MCP, or AI IDE | Job ID, histogram |
 
 ---
 
@@ -96,20 +103,49 @@ Full agent workflow: [Qiskit Developer Pack — worked example](./ide/QISKIT-DEV
 
 ---
 
+## Qiskit Lab (v1.9.2+)
+
+The **Qiskit Lab** panel provides a dedicated Qiskit development environment inside VS Code / Cursor:
+
+- **12 ready-to-run templates** — Bell state, GHZ, Grover, teleportation, variational ansatz, Deutsch-Jozsa, QAOA, and more
+- **Local Aer simulation** — run Qiskit Python circuits instantly without IBM credentials
+- **One-click export** — `qasm2.dumps()` produces OpenQASM 2.0 for hardware submission
+- **AI workflows** — ask the agent to transpile, optimize, or submit the exported circuit
+
+Open via: **Quantum → Qiskit Lab** in the sidebar.
+
+### AI-powered transpilation
+
+The extension integrates with **[`qiskit-ibm-transpiler`](https://github.com/Qiskit/qiskit-ibm-transpiler)** for cloud-based AI transpilation:
+
+```
+Agent prompt: "Transpile this circuit for ibm_fez using the AI transpiler and submit with 4096 shots"
+```
+
+The `quantum-assistant` MCP + `qiskit-ibm-transpiler` MCP together provide:
+1. **AI routing** — intelligent pass selection for target hardware
+2. **Hardware-aware optimization** — native ISA gates for the selected backend
+3. **Seamless submit** — transpiled QASM flows directly to `submit_qasm_job`
+
+Setup: [Qiskit Developer Pack](./ide/QISKIT-DEVELOPER-PACK.md) installs both MCP servers together.
+
+---
+
 ## Run on IBM hardware
 
-### Option A — VS Code Quantum Lab
+### Option A — Qiskit Lab → Quantum Lab
 
-1. Install [Quantum OpenQASM Assistant](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant)
-2. Open `bell-from-qiskit.qasm` in Quantum Lab
-3. Configure IBM API key + service CRN → submit job → view histogram
+1. Open **Qiskit Lab** → select a template or write your own circuit
+2. **Simulate** locally with Aer to verify results
+3. **Export** to OpenQASM 2.0 → opens in **Quantum Lab** for hardware submission
+4. Configure IBM API key + service CRN → submit job → view histogram
 
 ### Option B — MCP (Cursor / VS Code AI)
 
 1. **Quantum → Setup MCP** (or see [Local MCP setup](./ide/LOCAL-MCP-SETUP.md))
 2. In chat: *"Submit bell-from-qiskit.qasm to the least busy simulator with 4096 shots"*
 
-### Option B+ — Qiskit Developer Pack (recommended for Qiskit workflows)
+### Option C — Qiskit Developer Pack (recommended for Qiskit workflows)
 
 Install [Qiskit MCP Servers](https://github.com/Qiskit/mcp-servers) **and** OpenQASM execution together:
 
@@ -117,9 +153,9 @@ Install [Qiskit MCP Servers](https://github.com/Qiskit/mcp-servers) **and** Open
 ./deployments/qiskit-developer-pack/setup-qiskit-developer-pack.sh --ide cursor
 ```
 
-Then ask the agent to search docs, build a circuit in Qiskit, export OpenQASM 2.0, and submit via `quantum-openqasm-mcp`. See [Qiskit Developer Pack](./ide/QISKIT-DEVELOPER-PACK.md).
+Then ask the agent to search docs, build a circuit in Qiskit, export OpenQASM 2.0, transpile with the AI transpiler, and submit via `quantum-openqasm-mcp`. See [Qiskit Developer Pack](./ide/QISKIT-DEVELOPER-PACK.md).
 
-### Option C — Remote team gateway
+### Option D — Remote team gateway
 
 Deploy [Code Engine](../deployments/code-engine/README.md) and use [remote MCP](../deployments/mcp-remote-sse/README.md) — IBM credentials stay on the server.
 
@@ -132,8 +168,15 @@ Deploy [Code Engine](../deployments/code-engine/README.md) and use [remote MCP](
 | `Sampler` V2 primitive | IBM Quantum REST `program_id: sampler` |
 | OpenQASM 2.0 payload | `submit_qasm_job` MCP tool / Quantum Lab |
 | Backend selection | `list_backends` / Lab backend picker |
+| `qiskit-ibm-transpiler` | AI transpilation via MCP / Qiskit Lab workflow |
+| Aer local sim | **Qiskit Lab** Aer panel (Python bridge) |
 
-Circuits must be **OpenQASM 2.0** with `include "qelib1.inc"` and **native gates for the target backend** (transpile in Qiskit before `qasm2.dumps`, or use [`qiskit-bell-transpile-export.py`](../examples/qiskit-bell-transpile-export.py)). Qiskit features that cannot export to OpenQASM 2 (e.g. some dynamic circuits) raise `QASM2ExportError` — fix the circuit in Qiskit before submitting here.
+Circuits must be **OpenQASM 2.0** with `include "qelib1.inc"` and **native gates for the target backend**. Transpile using one of:
+- **`qiskit-ibm-transpiler`** MCP (AI-powered, cloud) — recommended with Qiskit Developer Pack
+- **Qiskit SDK** locally before `qasm2.dumps()` — see [`qiskit-bell-transpile-export.py`](../examples/qiskit-bell-transpile-export.py)
+- **Qiskit Lab** panel → agent prompt: *"transpile for ibm_fez"*
+
+Qiskit features that cannot export to OpenQASM 2 (e.g. some dynamic circuits) raise `QASM2ExportError` — fix the circuit in Qiskit before submitting here.
 
 ---
 

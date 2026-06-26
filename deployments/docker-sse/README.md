@@ -57,7 +57,7 @@ docker run -d \
   -e IBM_API_KEY=your_quantum_api_key \
   -e IBM_SERVICE_CRN=crn:v1:bluemix:public:quantum-computing:... \
   -e IBM_QUANTUM_ENDPOINT=https://us-east.quantum-computing.cloud.ibm.com \
-  -e BRIDGE_ADMIN_SECRET=your-admin-secret \
+  -e BRIDGE_ADMIN_SECRET=your_admin_secret \
   --restart unless-stopped \
   quantum-mcp-remote
 ```

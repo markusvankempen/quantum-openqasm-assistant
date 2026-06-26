@@ -29,9 +29,10 @@ Internal/
 internal/
 
 # Local IDE / MCP configs with secrets or absolute paths
-.cursor/mcp.json
+.cursor/
 .bob/
 .vscode/mcp.json
+.vscode/mcp.json.bak*
 
 # Code Engine bridge (implementation detail — public repo documents it only)
 deployments/code-engine/bridge.mjs

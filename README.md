@@ -104,7 +104,9 @@ sequenceDiagram
 
 | Feature | Description |
 |---------|-------------|
-| **Quantum Lab** | Interactive panel with example circuits and histogram results |
+| **Quantum Lab** | Interactive OpenQASM panel with example circuits and histogram results |
+| **Qiskit Lab** | Dedicated Qiskit Python panel — 12 templates, Aer sim, export to OpenQASM |
+| **AI Transpilation** | `qiskit-ibm-transpiler` integration for hardware-native circuit optimization |
 | **OpenQASM 2.0** | IBM hardware ISA format (`rz`, `sx`, `cz` native gates) |
 | **MCP tools** | `list_backends`, `submit_qasm_job`, `get_job_status`, `get_job_results`, and more |
 | **Multi-IDE MCP** | One-click setup for Cursor, VS Code, Bob, Antigravity & Claude Desktop |
@@ -220,7 +222,7 @@ See **[docs/PROJECT-STRUCTURE.md](./docs/PROJECT-STRUCTURE.md)** for the complet
 
 ## Qiskit Integration
 
-Design circuits in **Qiskit**, export to **OpenQASM 2.0**, and run on IBM Quantum hardware via MCP or Quantum Lab:
+Design circuits in **Qiskit** (or the built-in **Qiskit Lab** panel), export to **OpenQASM 2.0**, transpile with **AI-powered `qiskit-ibm-transpiler`**, and run on IBM Quantum hardware:
 
 ```python
 from qiskit import QuantumCircuit, qasm2
@@ -245,8 +247,13 @@ measure q[1] -> c[1];
 
 **No Qiskit dependency at runtime** — the MCP server speaks OpenQASM + IBM Quantum REST directly.
 
+**v1.9.2 Qiskit features:**
+- **Qiskit Lab** — 12 templates (Bell, GHZ, Grover, teleportation, VQE ansatz, QAOA, …), local Aer sim, one-click export
+- **AI transpilation** — `qiskit-ibm-transpiler` MCP integration for hardware-native optimization
+- **`quantum-assistant` MCP** — streamlined MCP key for AI IDE setup
+
 - Full guide: [docs/QISKIT-INTEGRATION.md](./docs/QISKIT-INTEGRATION.md)
-- **Qiskit Developer Pack** (Qiskit MCP + OpenQASM): [docs/ide/QISKIT-DEVELOPER-PACK.md](./docs/ide/QISKIT-DEVELOPER-PACK.md)
+- **Qiskit Developer Pack** (Qiskit MCP + AI transpiler + OpenQASM): [docs/ide/QISKIT-DEVELOPER-PACK.md](./docs/ide/QISKIT-DEVELOPER-PACK.md)
 - Example script: [examples/qiskit-bell-export.py](./examples/qiskit-bell-export.py)
 
 ---
