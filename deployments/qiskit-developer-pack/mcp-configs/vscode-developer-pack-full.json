@@ -18,7 +18,7 @@
         "QISKIT_IBM_TOKEN": "REPLACE_WITH_IBM_QUANTUM_TOKEN"
       }
     },
-    "quantum-openqasm-mcp": {
+    "quantum-assistant": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"]

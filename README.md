@@ -40,10 +40,10 @@ Quantum OpenQASM Assistant connects AI agents and developers to **IBM Quantum** 
 
 | Product | Identifier | Version |
 |---------|------------|---------|
-| **VS Code Extension** | [`markusvankempen.quantum-openqasm-assistant`](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant) | **1.7.4** |
-| **NPM MCP Server** | [`@markusvankempen/quantum-openqasm-mcp`](https://www.npmjs.com/package/@markusvankempen/quantum-openqasm-mcp) | **1.7.4** |
-| **MCP Registry** | [`io.github.markusvankempen/quantum-openqasm-mcp`](https://registry.modelcontextprotocol.io/servers/io.github.markusvankempen/quantum-openqasm-mcp) | **1.7.4** |
-| **Public repo** | [quantum-openqasm-assistant](https://github.com/markusvankempen/quantum-openqasm-assistant) | tag `v1.7.4` |
+| **VS Code Extension** | [`markusvankempen.quantum-openqasm-assistant`](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant) | **1.9.2** |
+| **NPM MCP Server** | [`@markusvankempen/quantum-openqasm-mcp`](https://www.npmjs.com/package/@markusvankempen/quantum-openqasm-mcp) | **1.9.2** |
+| **MCP Registry** | [`io.github.markusvankempen/quantum-openqasm-mcp`](https://registry.modelcontextprotocol.io/servers/io.github.markusvankempen/quantum-openqasm-mcp) | **1.9.2** |
+| **Public repo** | [quantum-openqasm-assistant](https://github.com/markusvankempen/quantum-openqasm-assistant) | tag `v1.9.2` |
 
 ```mermaid
 graph TB

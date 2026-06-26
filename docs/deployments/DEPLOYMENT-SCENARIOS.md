@@ -243,7 +243,7 @@ IBM_SERVICE_CRN=crn:v1:bluemix:public:quantum-computing:... \
 ./deploy.sh
 ```
 
-Optional: `IBM_QUANTUM_ENDPOINT`, `IBM_QUANTUM_BACKEND`, `QUANTUM_MCP_NPM_VERSION=1.7.4`
+Optional: `IBM_QUANTUM_ENDPOINT`, `IBM_QUANTUM_BACKEND`, `QUANTUM_MCP_NPM_VERSION=1.9.2`
 
 The script outputs:
 

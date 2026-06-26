@@ -58,8 +58,9 @@ Reload your IDE after install.
 |------|---------|-------------|
 | **core** (default) | docs + qiskit + openqasm | Learn Qiskit, build circuits, run OQ2 on hardware |
 | **full** | core + ibm-runtime | Also run Qiskit Runtime primitives via MCP |
+| **agent** | full + code-assistant + ibm-transpiler | **Phase 2b** — AI write, transpile, run, submit (recommended) |
 
-Optional extras (manual): `qiskit-ibm-transpiler-mcp-server`, `qiskit-gym-mcp-server` — see [Qiskit MCP Servers](https://github.com/Qiskit/mcp-servers).
+Optional extras (manual): `qiskit-gym-mcp-server` — see [Qiskit MCP Servers](https://github.com/Qiskit/mcp-servers).
 
 ---
 

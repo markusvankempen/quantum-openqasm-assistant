@@ -15,7 +15,7 @@
 # Optional:
 #   IBM_QUANTUM_ENDPOINT=https://us-east.quantum-computing.cloud.ibm.com
 #   IBM_QUANTUM_BACKEND=ibm_fez
-#   QUANTUM_MCP_NPM_VERSION=1.7.4
+#   QUANTUM_MCP_NPM_VERSION=1.9.2
 # =============================================================================
 
 set -euo pipefail
@@ -49,7 +49,7 @@ IBM_QUANTUM_BACKEND="${IBM_QUANTUM_BACKEND:-ibm_fez}"
 
 IMAGE="${ICR_HOST}/${ICR_NAMESPACE}/${APP_NAME}:${IMAGE_TAG}"
 DOCKERFILE="${DOCKERFILE:-$SCRIPT_DIR/Dockerfile}"
-QUANTUM_MCP_NPM_VERSION="${QUANTUM_MCP_NPM_VERSION:-1.7.4}"
+QUANTUM_MCP_NPM_VERSION="${QUANTUM_MCP_NPM_VERSION:-1.9.2}"
 
 log()  { echo "[$(date '+%H:%M:%S')] $*"; }
 fail() { echo "[ERROR] $*" >&2; exit 1; }

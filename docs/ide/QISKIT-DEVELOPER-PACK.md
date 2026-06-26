@@ -281,6 +281,54 @@ The setup script checks for **`qiskit`** and **`qiskit-ibm-runtime`**. If missin
 
 ---
 
+## Phase 2 — Qiskit Lab (extension v1.8+)
+
+The VS Code / Cursor extension **Quantum Lab** adds a **Qiskit Python** tab alongside OpenQASM:
+
+| Step | Action in Quantum Lab |
+|------|------------------------|
+| 1 | Write Qiskit code with `qc = QuantumCircuit(...)` |
+| 2 | **Run Aer Simulation** — local counts histogram (no IBM credentials) |
+| 3 | **Transpile & Export** — OpenQASM 2.0 for selected IBM backend |
+| 4 | **Transpile → Run on Hardware** — export + submit via MCP |
+
+**Requires:** Python stack from Developer Pack setup (`qiskit`, `qiskit-aer`, `qiskit-ibm-runtime`) in `~/.quantum-openqasm-mcp/qiskit-venv`.
+
+Open: **Quantum → Open Quantum Lab** → tab **Qiskit Python**.
+
+---
+
+## Phase 2b — Agent tier (extension v1.9+)
+
+Adds MCP servers so AI assistants can **write**, **transpile**, **run**, and **submit** Qiskit circuits end-to-end:
+
+| Tier | MCP servers |
+|------|-------------|
+| **agent** *(recommended)* | core + **qiskit-code-assistant** + **qiskit-ibm-runtime** + **qiskit-ibm-transpiler** |
+
+| Server | AI can… |
+|--------|---------|
+| **qiskit-code-assistant** | Generate and refine Qiskit Python |
+| **qiskit-ibm-transpiler** | AI routing, hybrid transpile (QASM 3 in/out) |
+| **qiskit-ibm-runtime** | Run Sampler/Estimator on IBM Quantum |
+| **quantum-openqasm-mcp** | Submit **OpenQASM 2.0** to Sampler V2 |
+
+**Setup:** Quantum sidebar → **Qiskit Developer Pack** → tier **agent** → enter `QISKIT_IBM_TOKEN` → Install → **Reload Window**.
+
+**Example prompt (Cursor Agent chat):**
+
+> Use qiskit-code-assistant to build a Bell state. Transpile for ibm_fez with qiskit-ibm-transpiler. Export OpenQASM 2.0 with native gates. Submit with quantum-openqasm-mcp submit_qasm_job and show the histogram.
+
+**CLI:**
+
+```bash
+QISKIT_IBM_TOKEN=your_token ./deployments/qiskit-developer-pack/setup-qiskit-developer-pack.sh --tier agent --ide cursor
+```
+
+Optional manual add-on: **qiskit-gym** (RL circuit synthesis) — see [Qiskit MCP Servers](https://github.com/Qiskit/mcp-servers).
+
+---
+
 ## Related
 
 - [Qiskit MCP Servers (GitHub)](https://github.com/Qiskit/mcp-servers)

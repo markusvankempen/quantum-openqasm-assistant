@@ -8,9 +8,20 @@
       "command": "uvx",
       "args": ["qiskit-mcp-server"]
     },
+    "qiskit-code-assistant": {
+      "command": "uvx",
+      "args": ["qiskit-code-assistant-mcp-server"]
+    },
     "qiskit-ibm-runtime": {
       "command": "uvx",
       "args": ["qiskit-ibm-runtime-mcp-server"],
+      "env": {
+        "QISKIT_IBM_TOKEN": "REPLACE_WITH_IBM_QUANTUM_TOKEN"
+      }
+    },
+    "qiskit-ibm-transpiler": {
+      "command": "uvx",
+      "args": ["qiskit-ibm-transpiler-mcp-server"],
       "env": {
         "QISKIT_IBM_TOKEN": "REPLACE_WITH_IBM_QUANTUM_TOKEN"
       }

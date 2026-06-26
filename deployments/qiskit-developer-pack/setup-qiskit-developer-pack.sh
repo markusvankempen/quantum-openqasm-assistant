@@ -4,7 +4,7 @@
 #
 # Bundles official Qiskit MCP servers with Quantum OpenQASM Assistant:
 #   core: qiskit-docs, qiskit, quantum-openqasm-mcp
-#   full: + qiskit-ibm-runtime (needs QISKIT_IBM_TOKEN)
+#   agent: full + qiskit-code-assistant + qiskit-ibm-transpiler (Phase 2b — AI transpile/run)
 #
 # Usage:
 #   ./setup-qiskit-developer-pack.sh
@@ -42,9 +42,10 @@ Qiskit Developer Pack — MCP bundle setup
   ./setup-qiskit-developer-pack.sh [options]
 
 Options:
-  --tier TIER       core (default) | full
+  --tier TIER       core (default) | full | agent
                     core = qiskit-docs + qiskit + quantum-openqasm-mcp
                     full = core + qiskit-ibm-runtime
+                    agent = full + qiskit-code-assistant + qiskit-ibm-transpiler
   --ide IDE         cursor | vscode | bob | antigravity | claude | all
                     (comma-separated)
   --workspace       Also merge into repo .vscode/mcp.json
@@ -86,7 +87,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-[[ "$TIER" == "core" || "$TIER" == "full" ]] || fail "--tier must be core or full"
+[[ "$TIER" == "core" || "$TIER" == "full" || "$TIER" == "agent" ]] || fail "--tier must be core, full, or agent"
 
 require_cmd() {
   command -v "$1" >/dev/null 2>&1 || fail "Missing required command: $1"
@@ -163,22 +164,26 @@ generate_deployed_configs() {
   [[ -f "$cursor_src" ]] || fail "Missing template: $cursor_src"
   [[ -f "$vscode_src" ]] || fail "Missing template: $vscode_src"
 
-  if [[ -n "${QISKIT_IBM_TOKEN:-}" && "$TIER" == "full" ]]; then
-    python3 - "$cursor_src" "${OUT_DIR}/cursor-developer-pack.json" "$vscode_src" "${OUT_DIR}/vscode-developer-pack.json" <<'PY'
+  if [[ -n "${QISKIT_IBM_TOKEN:-}" && ( "$TIER" == "full" || "$TIER" == "agent" ) ]]; then
+    python3 - "$cursor_src" "${OUT_DIR}/cursor-developer-pack.json" "$vscode_src" "${OUT_DIR}/vscode-developer-pack.json" "$TIER" <<'PY'
 import json, sys
 from pathlib import Path
 
 token = __import__("os").environ["QISKIT_IBM_TOKEN"]
-cursor_src, cursor_out, vscode_src, vscode_out = sys.argv[1:5]
+cursor_src, cursor_out, vscode_src, vscode_out, tier = sys.argv[1:6]
+token_keys = ["qiskit-ibm-runtime"]
+if tier == "agent":
+    token_keys.append("qiskit-ibm-transpiler")
 
 for src, out, key in [
     (cursor_src, cursor_out, "mcpServers"),
     (vscode_src, vscode_out, "servers"),
 ]:
     data = json.loads(Path(src).read_text())
-    entry = data[key].get("qiskit-ibm-runtime")
-    if entry and "env" in entry:
-        entry["env"]["QISKIT_IBM_TOKEN"] = token
+    for name in token_keys:
+        entry = data[key].get(name)
+        if entry and "env" in entry:
+            entry["env"]["QISKIT_IBM_TOKEN"] = token
     Path(out).write_text(json.dumps(data, indent=2) + "\n")
     print(f"Generated (token injected): {out}")
 PY
@@ -187,8 +192,8 @@ PY
     cp "$vscode_src" "${OUT_DIR}/vscode-developer-pack.json"
     log "Generated ${OUT_DIR}/cursor-developer-pack.json"
     log "Generated ${OUT_DIR}/vscode-developer-pack.json"
-    if [[ "$TIER" == "full" && -z "${QISKIT_IBM_TOKEN:-}" ]]; then
-      log "WARN: full tier — set QISKIT_IBM_TOKEN before run, or edit qiskit-ibm-runtime env in mcp.json"
+    if [[ ( "$TIER" == "full" || "$TIER" == "agent" ) && -z "${QISKIT_IBM_TOKEN:-}" ]]; then
+      log "WARN: ${TIER} tier — set QISKIT_IBM_TOKEN before run, or edit mcp.json after install"
     fi
   fi
 }
@@ -267,11 +272,11 @@ install_python_qiskit_stack() {
   log "Installing qiskit + qiskit-ibm-runtime into ${QISKIT_VENV} ..."
   if command -v uv >/dev/null 2>&1; then
     uv venv "${QISKIT_VENV}" --quiet
-    uv pip install --python "${QISKIT_PYTHON}" qiskit qiskit-ibm-runtime -q
+    uv pip install --python "${QISKIT_PYTHON}" qiskit qiskit-ibm-runtime qiskit-aer -q
   else
     python3 -m venv "${QISKIT_VENV}"
     "${QISKIT_PYTHON}" -m pip install -U pip -q
-    "${QISKIT_PYTHON}" -m pip install qiskit qiskit-ibm-runtime -q
+    "${QISKIT_PYTHON}" -m pip install qiskit qiskit-ibm-runtime qiskit-aer -q
   fi
   if python_has_qiskit_stack "${QISKIT_PYTHON}"; then
     log "Python Qiskit stack installed."
@@ -313,7 +318,9 @@ install_workspace() {
 pick_ides_interactive() {
   echo ""
   echo "Qiskit Developer Pack — tier: ${TIER}"
-  if [[ "$TIER" == "full" ]]; then
+  if [[ "$TIER" == "agent" ]]; then
+    echo "  Servers: qiskit-docs, qiskit, qiskit-code-assistant, qiskit-ibm-runtime, qiskit-ibm-transpiler, quantum-openqasm-mcp"
+  elif [[ "$TIER" == "full" ]]; then
     echo "  Servers: qiskit-docs, qiskit, quantum-openqasm-mcp, qiskit-ibm-runtime"
   else
     echo "  Servers: qiskit-docs, qiskit, quantum-openqasm-mcp"
@@ -376,14 +383,22 @@ main() {
   echo "    • qiskit-docs          (Qiskit documentation search)"
   echo "    • qiskit               (circuit build, QASM3/QPY)"
   echo "    • quantum-openqasm-mcp (OpenQASM 2.0 → IBM Sampler V2)"
-  if [[ "$TIER" == "full" ]]; then
+  if [[ "$TIER" == "agent" ]]; then
+    echo "    • qiskit-code-assistant (write & refine Qiskit Python)"
+    echo "    • qiskit-ibm-runtime   (Qiskit primitives on IBM hardware)"
+    echo "    • qiskit-ibm-transpiler (AI routing / hybrid transpile)"
+  elif [[ "$TIER" == "full" ]]; then
     echo "    • qiskit-ibm-runtime   (Qiskit primitives on IBM hardware)"
   fi
   echo ""
   echo "  Next steps:"
   echo "    1. Ensure ~/.quantum-openqasm-mcp/.env has IBM_API_KEY + IBM_SERVICE_CRN"
-  if [[ "$TIER" == "full" ]]; then
-    echo "    2. Set QISKIT_IBM_TOKEN for qiskit-ibm-runtime (if not injected)"
+  if [[ "$TIER" == "full" || "$TIER" == "agent" ]]; then
+    if [[ "$TIER" == "agent" ]]; then
+      echo "    2. Set QISKIT_IBM_TOKEN for Runtime + AI Transpiler (if not injected)"
+    else
+      echo "    2. Set QISKIT_IBM_TOKEN for qiskit-ibm-runtime (if not injected)"
+    fi
   fi
   echo "    3. Reload IDE (MCP: List Servers / restart)"
   echo "    4. Ask agent (see docs/ide/QISKIT-DEVELOPER-PACK.md#worked-example-bell-state-on-ibm-hardware):"

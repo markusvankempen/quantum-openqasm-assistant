@@ -16,7 +16,7 @@ model context protocol, ai assistant, quantum hardware, qiskit, quantum programm
 
 > **VS Code / Cursor extension** for **IBM Quantum** — run **OpenQASM 2.0** `.qasm` circuits on real **quantum hardware** via the **Model Context Protocol (MCP)**. **Quantum Lab** panel, **job polling**, **histogram** results, **Diagnostics** UI, and one-click **MCP registration** for Cursor, VS Code, Bob & Antigravity.
 
-**Publisher:** `markusvankempen` · **Extension ID:** `quantum-openqasm-assistant` · **Version:** **1.7.4** · **NPM MCP:** `@markusvankempen/quantum-openqasm-mcp@1.7.4`
+**Publisher:** `markusvankempen` · **Extension ID:** `quantum-openqasm-assistant` · **Version:** **1.9.2** · **NPM MCP:** `@markusvankempen/quantum-openqasm-mcp@1.9.2`
 
 **Search terms:** `vscode quantum extension` · `openqasm vscode` · `ibm quantum vscode` · `quantum lab` · `submit qasm` · `mcp quantum` · `cursor quantum` · `qiskit developer pack` · `claude desktop mcp` · `bell state hardware`
 
@@ -26,18 +26,15 @@ model context protocol, ai assistant, quantum hardware, qiskit, quantum programm
 
 | Feature | Description |
 |---------|-------------|
-| **Quantum Lab** | Interactive panel with built-in example circuits |
+| **Quantum Lab** | OpenQASM 2.0 editor — run circuits on IBM hardware |
+| **Qiskit Lab** | Dedicated Qiskit Python panel · Aer sim · transpile → OpenQASM → hardware |
+| **Setup Lab Qiskit** | MCP bundle: qiskit-ibm-transpiler, code assistant, **quantum-assistant** alias |
 | **Load / Save circuits** | Open and save OpenQASM 2.0 `.qasm` files from Quantum Lab |
-| **Submit .qasm files** | One-click submit from the editor title bar |
 | **Live job polling** | Auto-polls job status every 15s with elapsed time |
-| **Histogram results** | Measurement counts visualized as a bar chart with Bell-state fidelity |
-| **Ask AI prompts** | Circuit-writing and MCP tool prompts sent to IDE AI chat |
-| **MCP local/remote** | Local stdio npm MCP or **remote Code Engine SSE** (no local API keys) |
-| **Remote gateway test** | Diagnostics panel tests `/health` + MCP `tools/list` on Code Engine |
-| **Remote IDE setup** | One-click register `quantum-openqasm-mcp-remote` for Cursor, VS Code, Bob, Antigravity |
-| **Multi-IDE MCP setup** | One-click register `quantum-openqasm-mcp` in Cursor, VS Code, Bob, Antigravity & Claude Desktop |
-| **Qiskit Developer Pack** | Diagnostics button bundles Qiskit MCP servers + quantum-openqasm-mcp (core/full tier) |
-| **Diagnostics panel** | Test auth, backends, Python Qiskit stack, and save all settings from the UI |
+| **Histogram results** | Measurement counts as bar chart with Bell-state fidelity |
+| **Ask AI prompts** | MCP workflow prompts (transpiler vs quantum-assistant split) |
+| **MCP local/remote** | Local stdio npm MCP or **remote Code Engine SSE** |
+| **Diagnostics panel** | Test auth, backends, Python Qiskit stack, and save all settings |
 
 ---
 
@@ -46,7 +43,7 @@ model context protocol, ai assistant, quantum hardware, qiskit, quantum programm
 ### 1. Install
 
 ```bash
-code --install-extension quantum-openqasm-assistant-1.7.0.vsix
+code --install-extension quantum-openqasm-assistant-1.9.2.vsix
 ```
 
 Or install from the Extensions Marketplace by searching **Quantum OpenQASM Assistant** (publisher: **markusvankempen**).

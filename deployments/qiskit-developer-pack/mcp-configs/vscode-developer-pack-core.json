@@ -10,7 +10,7 @@
       "command": "uvx",
       "args": ["qiskit-mcp-server"]
     },
-    "quantum-openqasm-mcp": {
+    "quantum-assistant": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@markusvankempen/quantum-openqasm-mcp"]
