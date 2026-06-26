@@ -1,0 +1,39 @@
+# Rsync filter for scripts/sync-to-public.sh (merge rules)
+
++ /.env.example
++ /.gitignore
++ /.gitignore.public
++ /.gitignore.private
++ /.public-rsync-filter
++ /.vscode/
++ /.vscode/***
++ /CODE_OF_CONDUCT.md
++ /CONTRIBUTING.md
++ /LICENSE
++ /README.md
++ /mise.toml
+
++ /scripts/
++ /scripts/check-secrets.sh
++ /scripts/sync-to-public.sh
++ /scripts/setup-dev-repo.sh
++ /scripts/use-private-gitignore.sh
++ /scripts/use-public-gitignore.sh
+
++ /docs/
++ /docs/***
+
++ /extension/
++ /extension/README.md
++ /extension/media/
++ /extension/media/icon.png
++ /extension/media/icon.svg
+
++ /examples/
++ /examples/***
+
++ /deployments/
++ /deployments/***
+- /deployments/code-engine/bridge.mjs
+
+- *

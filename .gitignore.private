@@ -1,0 +1,90 @@
+# ============================================
+# PRIVATE REPO: full project (quantum-openqasm-assistant-dev)
+# ============================================
+# Activate:  bash scripts/use-private-gitignore.sh
+# Publish docs to public GitHub:  bash scripts/sync-to-public.sh
+
+# Secrets & credentials — NEVER commit
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+secrets/
+credentials/
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+
+.quantum-openqasm-mcp/
+.quantum-mcp/
+**/.mcpregistry_*
+
+# Internal maintainer docs
+Internal/
+internal/
+
+# Local IDE / MCP configs with secrets or absolute paths
+.cursor/mcp.json
+.bob/
+.vscode/mcp.json
+
+# Code Engine bridge (implementation detail — public repo documents it only)
+deployments/code-engine/bridge.mjs
+
+# Generated / local MCP configs
+**/mcp-configs/deployed/CE_ENDPOINT.txt
+**/mcp-configs/deployed/*.json
+!**/mcp-configs/deployed/README.md
+
+# Compiled output
+extension/out/
+packages/*/dist/
+out/
+dist/
+build/
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Lock files at repo root only (keep extension + MCP package locks)
+/package-lock.json
+/yarn.lock
+
+# IDE & OS
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs & temp
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tmp
+*.temp
+.cache/
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+
+# VS Code Extension build artifacts
+*.vsix
+
+# Public sync scratch (created by sync-to-public.sh)
+.public-sync/
+
+# IBM Cloud local state
+.bluemix/
+.cfignore

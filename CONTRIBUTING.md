@@ -10,12 +10,28 @@ We use a **two-repo distribution model**:
 
 | Repo | URL | Purpose |
 |------|-----|---------|
-| **Public** | [markusvankempen/quantum-openqasm-assistant](https://github.com/markusvankempen/quantum-openqasm-assistant) | README, project structure, contributing guidelines — **no extension source** |
-| **Private dev** | *(private repo — coming soon)* | Full source, CI, VSIX + npm publish |
+| **Public** | [markusvankempen/quantum-openqasm-assistant](https://github.com/markusvankempen/quantum-openqasm-assistant) | README, docs, deployment guides — **no extension source** |
+| **Private dev** | [markusvankempen/quantum-openqasm-assistant-dev](https://github.com/markusvankempen/quantum-openqasm-assistant-dev) *(private)* | Full source, CI, VSIX + npm publish |
 
 - **End users** install the VS Code extension from the Marketplace or a `.vsix` file — do not clone GitHub to run the extension in production.
 - **Code contributions** require access to the private dev repository. Open a [GitHub issue](https://github.com/markusvankempen/quantum-openqasm-assistant/issues) first to discuss changes.
-- **Documentation fixes** can be proposed against the public repo via pull request.
+- **Documentation fixes** can be proposed against the public repo via pull request, or synced from private with `bash scripts/sync-to-public.sh`.
+
+### Maintainer workflow (two repos)
+
+```bash
+# One-time: private repo + remotes
+bash scripts/setup-dev-repo.sh
+
+# Daily dev (full source tracked)
+bash scripts/use-private-gitignore.sh   # if not already active
+git push origin master                  # private dev repo
+
+# After release: push docs-only snapshot to public GitHub
+bash scripts/sync-to-public.sh "Release v1.9.2 docs"
+```
+
+See [docs/ide/REPO-WORKFLOW.md](./docs/ide/REPO-WORKFLOW.md) for details.
 
 ---
 
@@ -57,9 +73,9 @@ We use [mise](https://mise.jdx.dev/) for a consistent Node.js environment.
 Maintainers and invited contributors:
 
 ```bash
-git clone <private-repo-url>
-cd quantum-openqasm-assistant
-cp .gitignore.private .gitignore
+git clone git@github.com:markusvankempen/quantum-openqasm-assistant-dev.git
+cd quantum-openqasm-assistant-dev
+bash scripts/use-private-gitignore.sh   # no-op if already active
 ```
 
 ### 2. Install runtimes (mise)

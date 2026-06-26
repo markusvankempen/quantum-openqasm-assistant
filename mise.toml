@@ -40,3 +40,15 @@ run = "mise run check-secrets && mise run build && mise run test-e2e"
 [tasks.publish-mcp]
 description = "Publish MCP server to registry (npm must be live first)"
 run = "cd packages/quantum-openqasm-mcp && npm run publish:mcp"
+
+[tasks.sync-public]
+description = "Push docs-only snapshot to public GitHub (requires public remote)"
+run = "bash scripts/sync-to-public.sh"
+
+[tasks.setup-dev-repo]
+description = "One-time: private gitignore + origin/public remotes"
+run = "bash scripts/setup-dev-repo.sh"
+
+[tasks.use-private-gitignore]
+description = "Track full source (private dev repo mode)"
+run = "bash scripts/use-private-gitignore.sh"

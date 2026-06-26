@@ -43,7 +43,9 @@ Quantum OpenQASM Assistant connects AI agents and developers to **IBM Quantum** 
 | **VS Code Extension** | [`markusvankempen.quantum-openqasm-assistant`](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant) | **1.9.2** |
 | **NPM MCP Server** | [`@markusvankempen/quantum-openqasm-mcp`](https://www.npmjs.com/package/@markusvankempen/quantum-openqasm-mcp) | **1.9.2** |
 | **MCP Registry** | [`io.github.markusvankempen/quantum-openqasm-mcp`](https://registry.modelcontextprotocol.io/servers/io.github.markusvankempen/quantum-openqasm-mcp) | **1.9.2** |
-| **Public repo** | [quantum-openqasm-assistant](https://github.com/markusvankempen/quantum-openqasm-assistant) | tag `v1.9.2` |
+| **Public repo** | [quantum-openqasm-assistant](https://github.com/markusvankempen/quantum-openqasm-assistant) | tag `v1.9.2` — docs & deployment guides only |
+
+> **Source code** is maintained in the private dev repo [`quantum-openqasm-assistant-dev`](https://github.com/markusvankempen/quantum-openqasm-assistant-dev). Install the product via [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=markusvankempen.quantum-openqasm-assistant) or [npm MCP](https://www.npmjs.com/package/@markusvankempen/quantum-openqasm-mcp) — not by cloning this repo for extension source.
 
 ```mermaid
 graph TB
